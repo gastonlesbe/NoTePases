@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "502397709024",
+    "firebase_url": "https://notepases-2763b.firebaseio.com",
+    "project_id": "notepases-2763b",
+    "storage_bucket": "notepases-2763b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502397709024:android:c157f84316fed354",
+        "android_client_info": {
+          "package_name": "com.gaston.lesbegueris.notepases"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502397709024-1me5utl67belrskg6juagqghel0a1164.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAAiyuGLrgf0X9UclZfEFqEbT_ebnxHoVE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

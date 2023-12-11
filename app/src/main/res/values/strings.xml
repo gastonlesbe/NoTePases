@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">No Te Pases</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="noTePases">¡¡¡¡¡¡No Te Pases!!!!!!</string>
+
+
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9841764898906750/1703228093</string>
+    <string name="Help" translatable="false">\?</string>
+    <string name="agregaDireccion">Agrega una Dirección</string>
+    <string name="escribeDireccion">Escribe la dirección de destino</string>
+    <string name="seleccionaDireccion">Selecciona la dirección correcta</string>
+    <string name="tartaEnConectar">Dependera de tu dispositivo la velocidad en encontrar tu ubicación, recuerda que es con el GPS</string>
+    <string name="modificarAlerta">Puedes modificar la distancia del destino a la que quieres que se dispare la alarma</string>
+    <string name="escribeDistancia">Escribe la nueva distancia y Acepta</string>
+    <string name="inicia">Inicia</string>
+    <string name="barra">Podras ver en la Barra de Notificaciones, a que distancia estas.</string>
+    <string name="volvermapa" >Puedes volver al mapa haciendo click en el icono</string>
+    <string name="cuandoLlegues">Cuando Llegues a la distancia programada de tu destino la Alarma se disparara</string>
+    <string name="apagarAlarma">Para apagar la Alarma hace click en el botón</string>
+    <string name="gracias">Gracias por utilizar mi aplicación. lesberweb@gmail.com</string>
+    <string name="recibiendo">Recibiendo Ubicación......</string>
+    <string name="falta">Faltan :</string>
+    <string name="distancia">Distancia:</string>
+    <string name="alerta">mts. Alerta</string>
+    <string name="nombre">Nombre</string>
+    <string name="ultimos">Ultimos</string>
+    <string name="favoritas">Favoritas</string>
+    <string name="modificanombre">Modifica el Nombre</string>
+
+</resources>
