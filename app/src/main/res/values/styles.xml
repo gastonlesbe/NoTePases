@@ -1,0 +1,20 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorPrimaryDark</item>
+        <item name="windowActionBar">@mipmap/botonazul</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textColorPrimary">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="TabWidgetTheme" parent="AppTheme">
+        <item name="android:textColorPrimary">@mipmap/botonazul</item>
+        <item name="android:textColorSecondary">@color/wallet_holo_blue_light</item>
+        <item name="colorPrimary">#DDDED6</item>
+    </style>
+
+</resources>

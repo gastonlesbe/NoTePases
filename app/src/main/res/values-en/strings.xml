@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="title_activity_maps">Map</string>
+    <string name="noTePases">You Arrived!!!!!!!!!!!</string>
+    <string name="agregaDireccion">Add an Address</string>
+    <string name="escribeDireccion">Write  your detination Address</string>
+    <string name="seleccionaDireccion">Select the right address</string>
+    <string name="tartaEnConectar">It will depend of your device the location time</string>
+    <string name="modificarAlerta">You can change the distance of your destination that you want to trigger the alarm</string>
+    <string name="escribeDistancia">Write the new distance and Acept</string>
+    <string name="inicia">Start</string>
+    <string name="barra">You can check in the Notificationbar the distance</string>
+    <string name="volvermapa">You can get back to the map clicking on the icon</string>
+    <string name="cuandoLlegues">When you get to the distance that you set in, the Alarm will be launch</string>
+    <string name="apagarAlarma">To stop the alarm just press the button</string>
+    <string name="gracias">Thanks for using my app, lesberweb@gmail.com</string>
+    <string name="recibiendo">Receibing Location ....</string>
+    <string name="falta">At :</string>
+    <string name="app_name">Don\'t Miss Out</string>
+    <string name="distancia">Distance:</string>
+    <string name="alerta">meters to Alert</string>
+    <string name="nombre">Name</string>
+    <string name="ultimos">Last</string>
+    <string name="favoritas">Favorites</string>
+    <string name="modificanombre">Change Nick</string>
+</resources>
