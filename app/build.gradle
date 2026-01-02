@@ -13,16 +13,41 @@ android {
         applicationId "com.gaston.lesbegueris.notepases"
         minSdkVersion 23
         targetSdkVersion 34
-        versionCode 12
-        versionName '1.12'
+        versionCode 13
+        versionName '1.13'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // Enabling multidex support.
         multiDexEnabled true
+    }
+    signingConfigs {
+        release {
+            def keystorePropertiesFile = rootProject.file("keystore.properties")
+            def keystoreProperties = new Properties()
+            if (keystorePropertiesFile.exists()) {
+                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+                def storeFilePath = keystoreProperties['storeFile']
+                if (storeFilePath.startsWith('app/')) {
+                    storeFile file(storeFilePath.substring(4)) // Remove 'app/' prefix since we're in app/build.gradle
+                } else {
+                    storeFile file(storeFilePath)
+                }
+                storePassword keystoreProperties['storePassword']
+                keyAlias keystoreProperties['keyAlias']
+                keyPassword keystoreProperties['keyPassword']
+            } else {
+                // Fallback: usar el keystore en app/key.jks (necesitarás proporcionar las contraseñas)
+                storeFile file('key.jks')
+                storePassword System.getenv("KEYSTORE_PASSWORD") ?: ""
+                keyAlias System.getenv("KEY_ALIAS") ?: "key"
+                keyPassword System.getenv("KEY_PASSWORD") ?: ""
+            }
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
     productFlavors {
