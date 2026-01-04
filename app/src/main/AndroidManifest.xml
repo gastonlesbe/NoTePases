@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
@@ -24,6 +25,16 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCXGPEtyCayE07CdMDEvnBZ30pISa12Dqw" />
+        
+        <!-- Appodeal App Key -->
+        <meta-data
+            android:name="com.appodeal.application_key"
+            android:value="@string/appodeal_app_key" />
+        
+        <!-- AdMob App ID (required by Appodeal since it uses AdMob as one of its ad networks) -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="@string/admob_app_id" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

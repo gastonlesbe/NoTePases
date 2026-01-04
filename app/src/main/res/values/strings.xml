@@ -26,5 +26,12 @@
     <string name="ultimos">Ultimos</string>
     <string name="favoritas">Favoritas</string>
     <string name="modificanombre">Modifica el Nombre</string>
+    
+    <!-- Appodeal App Key -->
+    <string name="appodeal_app_key">71d3e7b55bfb2243b36add91bcfa88dec0c86253c9a6d983</string>
+    
+    <!-- AdMob App ID (required by Appodeal since it uses AdMob as one of its ad networks) -->
+    <!-- Using Google's test App ID for development -->
+    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
 
 </resources>

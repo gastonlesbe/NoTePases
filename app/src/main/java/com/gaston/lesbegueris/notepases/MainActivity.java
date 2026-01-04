@@ -39,6 +39,7 @@ import java.util.Locale;
 
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.gaston.lesbegueris.notepases.util.AppodealHelper;
 
 public class MainActivity extends AppCompatActivity implements OnTabChangeListener {
 
@@ -66,6 +67,9 @@ public class MainActivity extends AppCompatActivity implements OnTabChangeListen
         //actionBar.setDisplayHomeAsUpEnabled(true);
         myToolbar.inflateMenu(R.menu.menu);
         myToolbar.setTitleTextColor(getResources().getColor(R.color.white));
+        
+        // Inicializar Appodeal (mismo método que en Caretemplate)
+        initAppodeal();
 
 
 
@@ -304,6 +308,13 @@ public class MainActivity extends AppCompatActivity implements OnTabChangeListen
         // TODO: Places API has been deprecated. This functionality needs to be reimplemented.
         // For now, this method is disabled.
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void initAppodeal() {
+        // Usar la clave de Appodeal desde strings.xml
+        String appodealAppKey = getString(R.string.appodeal_app_key);
+        AppodealHelper.initialize(this, appodealAppKey);
+        AppodealHelper.showBanner(this, R.id.adView);
     }
 }
 

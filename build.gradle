@@ -26,5 +26,9 @@ allprojects {
             name 'Google'
         }
         google()
+        // Appodeal repository (mismo que en Caretemplate)
+        maven {
+            url 'https://artifactory.appodeal.com/appodeal'
+        }
     }
 }

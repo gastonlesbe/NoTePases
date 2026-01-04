@@ -64,18 +64,6 @@
             </LinearLayout>
         </TabHost>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginBottom="67dp"
-            android:layout_marginEnd="47dp"
-            android:clickable="true"
-
-            app:srcCompat="@android:drawable/ic_input_add" />
-
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/my_toolbar"
             android:layout_width="match_parent"
@@ -84,6 +72,24 @@
             android:elevation="4dp"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+        <!-- Appodeal Banner Container -->
+        <FrameLayout
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@id/adView"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="47dp"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_input_add" />
 
 
     </RelativeLayout>
