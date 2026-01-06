@@ -9,7 +9,7 @@ tasks.whenTaskAdded { task ->
 
 android {
     namespace 'com.gaston.lesbegueris.notepases'
-    compileSdk 34
+    compileSdk 35
     
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
@@ -19,9 +19,9 @@ android {
     defaultConfig {
         applicationId "com.gaston.lesbegueris.notepases"
         minSdkVersion 23
-        targetSdkVersion 34
-        versionCode 13
-        versionName '1.13'
+        targetSdkVersion 35
+        versionCode 14
+        versionName '1.14'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // Enabling multidex support.
         multiDexEnabled true
