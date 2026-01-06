@@ -32,7 +32,9 @@
                 <FrameLayout
                         android:id="@android:id/tabcontent"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent" android:background="?attr/colorButtonNormal">
+                        android:layout_height="match_parent"
+                        android:background="?attr/colorButtonNormal"
+                        android:paddingBottom="60dp">
 
                     <LinearLayout
                             android:id="@+id/tab1"
@@ -45,7 +47,8 @@
                         <ListView
                                 android:id="@+id/listaUltimos"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content"
+                                android:paddingBottom="5dp"/>
                     </LinearLayout>
 
                     <LinearLayout
@@ -57,7 +60,8 @@
                         <ListView
                                 android:id="@+id/listaFavoritos"
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:layout_height="match_parent"
+                                android:paddingBottom="5dp"/>
                     </LinearLayout>
 
                 </FrameLayout>
@@ -81,15 +85,15 @@
             android:layout_alignParentBottom="true" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_above="@id/adView"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="47dp"
-            android:clickable="true"
-            app:srcCompat="@android:drawable/ic_input_add" />
+                android:id="@+id/fab1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_above="@id/adView"
+                android:layout_marginBottom="70dp"
+                android:layout_marginEnd="47dp"
+                android:clickable="true"
+                app:srcCompat="@android:drawable/ic_input_add" />
 
 
     </RelativeLayout>

@@ -217,7 +217,6 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             btnBuscar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     distancia();
                     starttraking();
                     guardarTemp();
@@ -228,8 +227,32 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                     //fn_getlocation();
 
                     trakingOn = true;
+                    // Cambiar el botón a "stop" inmediatamente
                     btnBuscar.setImageResource(R.mipmap.stop);
+                    // Actualizar el listener para que ahora detenga el tracking
+                    btnBuscar.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            stopTraking();
+                        }
+                    });
+                    // Reiniciar la actividad para reflejar el cambio de estado
                     Intent intent = getIntent();
+                    intent.putExtra("trakingOn", true);
+                    intent.putExtra("latitude2", latitude2);
+                    intent.putExtra("longitude2", longitude2);
+                    if (name != null) {
+                        intent.putExtra("nombre", name);
+                    }
+                    if (address != null) {
+                        intent.putExtra("address", address);
+                    }
+                    if (str_id != null) {
+                        intent.putExtra("str_id", str_id);
+                    }
+                    if (nota != null) {
+                        intent.putExtra("nota", nota);
+                    }
                     finish();
                     startActivity(intent);
                 }
@@ -239,13 +262,9 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             btnBuscar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
                     stopTraking();
-
                 }
             });
-
-
         }
     }
 
@@ -547,9 +566,17 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         try {
             addresses = geocoder.getFromLocation(
                     markerDestino.getPosition().latitude, markerDestino.getPosition().longitude, 1);
-            address = addresses.get(0).getAddressLine(0);
+            // Verificar que la lista no esté vacía antes de acceder al índice 0
+            if (addresses != null && !addresses.isEmpty() && addresses.get(0) != null) {
+                address = addresses.get(0).getAddressLine(0);
+            } else {
+                Log.w(TAG, "No addresses found for location");
+                address = null;
+            }
         } catch (IOException e) {
+            Log.e(TAG, "Geocoding error", e);
             e.printStackTrace();
+            address = null;
         }
         if (address != null && address.contains(",")) {
             destino = address.substring(0, address.indexOf(","));
@@ -576,6 +603,10 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             @Override
             public void onMarkerDragEnd(Marker arg0) {
                 // TODO Auto-generated method stub
+                if (markerDestino == null) {
+                    Log.e(TAG, "markerDestino is null in onMarkerDragEnd");
+                    return;
+                }
                 LatLng markerLocation = markerDestino.getPosition();
                 //Toast.makeText(MapsActivity.this, markerLocation.toString(), Toast.LENGTH_LONG).show();
                 //  Log.d("Marker", "finished");
@@ -586,17 +617,37 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                 try {
                     addresses = geocoder.getFromLocation(
                             markerDestino.getPosition().latitude, markerDestino.getPosition().longitude, 1);
-                    address = addresses.get(0).getAddressLine(0);
+                    // Verificar que la lista no esté vacía antes de acceder al índice 0
+                    if (addresses != null && !addresses.isEmpty() && addresses.get(0) != null) {
+                        address = addresses.get(0).getAddressLine(0);
+                    } else {
+                        Log.w(TAG, "No addresses found in onMarkerDragEnd");
+                        address = markerDestino.getPosition().latitude + ", " + markerDestino.getPosition().longitude;
+                    }
                 } catch (IOException e) {
+                    Log.e(TAG, "Geocoding error in onMarkerDragEnd", e);
                     e.printStackTrace();
+                    address = markerDestino.getPosition().latitude + ", " + markerDestino.getPosition().longitude;
                 }
-                destino = address.substring(0, address.indexOf(","));
+                
+                // Procesar la dirección de forma segura
+                if (address != null && address.contains(",")) {
+                    destino = address.substring(0, address.indexOf(","));
+                } else if (address != null) {
+                    destino = address;
+                } else {
+                    destino = "";
+                }
 
-                txtAddress.setText(destino);
+                if (txtAddress != null) {
+                    txtAddress.setText(destino);
+                }
                 latitude2 = markerDestino.getPosition().latitude;
                 longitude2 = markerDestino.getPosition().longitude;
-                Toast.makeText(MapsActivity.this, address,
-                        Toast.LENGTH_SHORT).show();
+                if (address != null) {
+                    Toast.makeText(MapsActivity.this, address,
+                            Toast.LENGTH_SHORT).show();
+                }
                 CircleOptions circleOptions = new CircleOptions()
                         .center(markerLocation)
                         .radius(Double.parseDouble(txtDistancia.getText().toString()))
@@ -647,6 +698,16 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         locationManager = (LocationManager)getApplicationContext().getSystemService(LOCATION_SERVICE);
         isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         isNetworkEnable = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        
+        // Remover listeners anteriores antes de registrar nuevos para evitar duplicados
+        if (locationManager != null) {
+            try {
+                locationManager.removeUpdates(this);
+            } catch (SecurityException e) {
+                Log.e(TAG, "Error removing previous location updates", e);
+            }
+        }
+        
         if (!isGPSEnable && !isNetworkEnable) {
 
         } else {
@@ -748,32 +809,56 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         settingsClient.checkLocationSettings(locationSettingsRequest);
 
         // new Google API SDK v11 uses getFusedLocationProviderClient(this)
-        getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, new LocationCallback() {
-                    @Override
-                    public void onLocationResult(LocationResult locationResult) {
-                        // do work here
-                        onLocationChanged(locationResult.getLastLocation());
+        // Guardar la referencia del callback para poder removerlo después
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                // do work here
+                if (locationResult != null && locationResult.getLastLocation() != null) {
+                    onLocationChanged(locationResult.getLastLocation());
+                    // Solo calcular distancia si markerDestino está inicializado
+                    if (markerDestino != null) {
                         distancia();
                     }
-                },
+                }
+            }
+        };
+        getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, mLocationCallback,
                 Looper.myLooper());
     }
 
     public void starttraking(){
+        // Verificar que markerDestino no sea null
+        if (markerDestino == null) {
+            Log.e(TAG, "markerDestino is null, cannot start tracking");
+            Toast.makeText(this, "Error: No se puede iniciar el seguimiento", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Geocoder geocoder;
         List<Address> addresses;
         geocoder = new Geocoder(this, Locale.getDefault());
         try {
             addresses = geocoder.getFromLocation(markerDestino.getPosition().latitude, markerDestino.getPosition().longitude, 1);
-            address = addresses.get(0).getAddressLine(0);
+            // Verificar que la lista no esté vacía antes de acceder al índice 0
+            if (addresses != null && !addresses.isEmpty() && addresses.get(0) != null) {
+                address = addresses.get(0).getAddressLine(0);
+            } else {
+                Log.w(TAG, "No addresses found for location in starttraking");
+                // Usar coordenadas como dirección si no se encuentra
+                address = markerDestino.getPosition().latitude + ", " + markerDestino.getPosition().longitude;
+            }
         } catch (IOException e) {
+            Log.e(TAG, "Geocoding error in starttraking", e);
             e.printStackTrace();
+            // Usar coordenadas como dirección si hay error
+            address = markerDestino.getPosition().latitude + ", " + markerDestino.getPosition().longitude;
         }
 
 
        // trakingOn = true;
 
+        // Verificar que markerDestino no sea null (ya se verificó al inicio del método)
         CharSequence charAlerta = txtDistancia.getText();
         alerta = parseInt(charAlerta.toString());
         String destination = String.valueOf(markerDestino.getPosition());
@@ -785,8 +870,10 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
         intent.putExtra("latitude2",  markerDestino.getPosition().latitude);
         intent.putExtra("longitude2",  markerDestino.getPosition().longitude);
-       // intent.putExtra("address", address);
-        //intent.putExtra("distancia", b);
+        intent.putExtra("address", address); // Pasar la dirección
+        intent.putExtra("nombre", name); // Pasar el nombre
+        intent.putExtra("str_id", str_id); // Pasar el ID si existe
+        intent.putExtra("nota", nota); // Pasar la nota (favorito)
         intent.putExtra("trakingOn", true);
         intent.putExtra("alerta", alerta);
 
@@ -825,14 +912,20 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     }
 
     public void distancia(){
+        // Verificar que markerDestino no sea null
+        if (markerDestino == null) {
+            Log.e(TAG, "markerDestino is null, cannot calculate distance");
+            if (txtBuscar != null) {
+                txtBuscar.setText(getString(R.string.recibiendo));
+            }
+            return;
+        }
 
         Location temp = new Location("");
         double marcadorLat = markerDestino.getPosition().latitude;
         double marcadorLon = markerDestino.getPosition().longitude;
         temp.setLatitude(marcadorLat);
         temp.setLongitude(marcadorLon);
-
-
 
         Location yo = new Location("");
         yo.setLatitude(latitude1);
@@ -841,7 +934,13 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         float[] results = new float[1];
         Location.distanceBetween( markerDestino.getPosition().latitude,  markerDestino.getPosition().longitude,
                 latitude1, longitude1, results);
-        dist = temp.distanceTo(location);
+        
+        // Verificar que location no sea null antes de usarlo
+        if (location != null) {
+            dist = temp.distanceTo(location);
+        } else {
+            dist = results[0];
+        }
         distance = results[0];
         b = (int) dist;
 
@@ -855,11 +954,56 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     }
 
     protected void stopLocationUpdates() {
+        // Remover LocationCallback del FusedLocationProviderClient
+        if (mFusedLocationClient != null && mLocationCallback != null) {
+            try {
+                mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+                Log.d(TAG, "FusedLocationProviderClient location updates removed");
+            } catch (SecurityException e) {
+                Log.e(TAG, "Error removing FusedLocationProviderClient updates", e);
+            }
+        }
+        
+        // Remover LocationManager listeners
+        if (locationManager != null) {
+            try {
+                locationManager.removeUpdates(this);
+                Log.d(TAG, "LocationManager location updates removed");
+            } catch (SecurityException e) {
+                Log.e(TAG, "Error removing LocationManager updates", e);
+            }
+        }
+        
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(
                     mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
         }
-
+    }
+    
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Restaurar listeners si el tracking está activo
+        if (trakingOn && mLocationRequest != null) {
+            startLocationUpdates();
+        }
+    }
+    
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // Remover listeners cuando la actividad se pausa para evitar consumo innecesario
+        // No remover si el tracking está activo (el servicio Traking se encarga de eso)
+        if (!trakingOn) {
+            stopLocationUpdates();
+        }
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        // Siempre remover todos los listeners cuando la actividad se destruye
+        stopLocationUpdates();
     }
     public void stopTraking(){
         NotificationManager notificationManager =
@@ -920,8 +1064,15 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         goApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         goApp.putExtra("trakingOn", trakingOn);
         goApp.putExtra("traking", trakingOn); // También agregar como "traking" para compatibilidad
-        goApp.putExtra("latitude2",  markerDestino.getPosition().latitude);
-        goApp.putExtra("longitude2", markerDestino.getPosition().longitude);
+        // Verificar que markerDestino no sea null antes de usar
+        if (markerDestino != null) {
+            goApp.putExtra("latitude2",  markerDestino.getPosition().latitude);
+            goApp.putExtra("longitude2", markerDestino.getPosition().longitude);
+        } else {
+            // Usar las coordenadas guardadas si markerDestino es null
+            goApp.putExtra("latitude2", latitude2);
+            goApp.putExtra("longitude2", longitude2);
+        }
         if (name != null) {
             goApp.putExtra("nombre", name);
         }

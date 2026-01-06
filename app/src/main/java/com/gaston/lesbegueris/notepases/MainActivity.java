@@ -310,6 +310,15 @@ public class MainActivity extends AppCompatActivity implements OnTabChangeListen
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Mostrar el banner cada vez que la actividad se reanuda
+        if (AppodealHelper.isInitialized()) {
+            AppodealHelper.showBanner(this, R.id.adView);
+        }
+    }
+
     private void initAppodeal() {
         // Usar la clave de Appodeal desde strings.xml
         String appodealAppKey = getString(R.string.appodeal_app_key);
