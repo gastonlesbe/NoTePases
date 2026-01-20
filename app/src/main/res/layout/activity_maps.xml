@@ -17,14 +17,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnClose"
+        style="@style/Widget.MaterialComponents.Button.Icon"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_margin="16dp"
-        android:background="@android:drawable/ic_menu_close_clear_cancel"
-        android:backgroundTint="#FFFFFF"
-        android:contentDescription="Cerrar"
+        android:contentDescription="@string/close"
+        android:text=""
+        app:icon="@android:drawable/ic_menu_close_clear_cancel"
+        app:iconPadding="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

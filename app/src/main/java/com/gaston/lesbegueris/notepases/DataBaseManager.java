@@ -4,7 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.View.OnClickListener;
 
 public class DataBaseManager {
 
@@ -39,10 +38,8 @@ public class DataBaseManager {
 	private static final String Where = null;
 	
 	
-	public DataBaseManager(OnClickListener onClickListener){
-		
-		
-		helper = new DbHelper((Context) onClickListener);
+	public DataBaseManager(Context context){
+		helper = new DbHelper(context);
 		db = helper.getWritableDatabase();
 	}
 

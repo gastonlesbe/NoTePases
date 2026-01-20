@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3f51b5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#1E88E5</color>
+    <color name="colorPrimaryDark">#1565C0</color>
+    <color name="colorAccent">#FFB300</color>
+    <color name="colorPrimaryVariant">#1565C0</color>
+    <color name="colorSecondary">#FFB300</color>
+    <color name="colorSecondaryVariant">#FF8F00</color>
+    <color name="colorOnPrimary">#FFFFFF</color>
+    <color name="colorOnSecondary">#1B1B1B</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorOnSurface">#1B1B1B</color>
+    <color name="colorBackground">#F7F7F7</color>
+    <color name="colorOnBackground">#1B1B1B</color>
+    <color name="favoriteRed">#F44336</color>
     <color name="white">#ffffff</color>
     <color name="marfil">#cafbf2</color>
     <color name="wallet_holo_blue_light">#33B5E5</color>

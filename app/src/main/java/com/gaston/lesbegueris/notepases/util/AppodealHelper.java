@@ -143,5 +143,12 @@ public class AppodealHelper {
             Log.e(TAG, "Error hiding banner", e);
         }
     }
+
+    /**
+     * Check if Appodeal is initialized
+     */
+    public static boolean isInitialized() {
+        return isInitialized;
+    }
 }
 

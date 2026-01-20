@@ -23,4 +23,18 @@
     <string name="ultimos">Last</string>
     <string name="favoritas">Favorites</string>
     <string name="modificanombre">Change Nick</string>
+    <string name="current_distance">Current distance</string>
+    <string name="alerta_label">Alert</string>
+    <string name="meters_short">m</string>
+    <string name="kilometers_short">km</string>
+    <string name="miles_short">mi</string>
+    <string name="detener">Stop</string>
+    <string name="units_title">Units</string>
+    <string name="units_system">Automatic (system)</string>
+    <string name="units_metric">Meters / Kilometers</string>
+    <string name="units_imperial">Miles</string>
+    <string name="delete">Delete</string>
+    <string name="delete_address_title">Delete address</string>
+    <string name="delete_address_message">This change can\'t be undone. Delete the address?</string>
+    <string name="delete_confirm">Delete</string>
 </resources>

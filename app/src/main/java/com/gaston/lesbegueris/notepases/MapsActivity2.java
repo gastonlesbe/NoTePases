@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -24,6 +22,7 @@ import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.button.MaterialButton;
 
 import java.io.IOException;
 import java.util.List;
@@ -57,7 +56,7 @@ public class MapsActivity2 extends AppCompatActivity
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
         
         // Configurar botón de cerrar
-        ImageButton btnClose = findViewById(R.id.btnClose);
+        MaterialButton btnClose = findViewById(R.id.btnClose);
         if (btnClose != null) {
             btnClose.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -188,6 +187,9 @@ public class MapsActivity2 extends AppCompatActivity
                 intent.putExtra("longitude2", latLng.longitude);
                 intent.putExtra("name", placeName);
                 intent.putExtra("address", fullAddress);
+                intent.putExtra("trakingOn", false);
+                intent.putExtra("traking", false);
+                intent.putExtra("fromSelection", true);
                 startActivity(intent);
                 finish();
             } else {
@@ -198,6 +200,9 @@ public class MapsActivity2 extends AppCompatActivity
                 intent.putExtra("longitude2", latLng.longitude);
                 intent.putExtra("name", "Ubicación");
                 intent.putExtra("address", latLng.latitude + ", " + latLng.longitude);
+                intent.putExtra("trakingOn", false);
+                intent.putExtra("traking", false);
+                intent.putExtra("fromSelection", true);
                 startActivity(intent);
                 finish();
             }
@@ -210,6 +215,9 @@ public class MapsActivity2 extends AppCompatActivity
             intent.putExtra("longitude2", latLng.longitude);
             intent.putExtra("name", "Ubicación");
             intent.putExtra("address", latLng.latitude + ", " + latLng.longitude);
+            intent.putExtra("trakingOn", false);
+            intent.putExtra("traking", false);
+            intent.putExtra("fromSelection", true);
             startActivity(intent);
             finish();
         }

@@ -6,58 +6,79 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="2dp"
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
-                android:layout_width="match_parent"
+            android:id="@+id/rowContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDeleteFav"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:layout_margin="20dp"
-                android:background="@drawable/custom_rectangle2"
-                android:gravity="center"
-                android:orientation="horizontal">
-
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/delete"
+                android:minWidth="40dp"
+                android:minHeight="40dp"
+                android:padding="6dp"
+                android:text=""
+                app:backgroundTint="@android:color/transparent"
+                app:icon="@android:drawable/ic_menu_delete"
+                app:iconPadding="0dp"
+                app:iconSize="40dp"
+                app:iconTint="@color/favoriteRed" />
 
             <LinearLayout
-                    android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:orientation="vertical">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtNombreFav"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:orientation="vertical" android:layout_margin="10dp">
+                    android:fontFamily="casual"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
-                <TextView
-                        android:id="@+id/txtNombreFav"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:fontFamily="casual"
-                        android:gravity="center_vertical|center"
-                        android:text="TextView"
-                        android:textSize="18sp"
-                        android:textStyle="bold"/>
-
-                <TextView
-                        android:id="@+id/txtAddressfav"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="monospace"
-                        android:gravity="center"
-                        android:text="TextView"
-                        android:textSize="14sp"/>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/txtAddressfav"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="monospace"
+                    android:gravity="center_vertical"
+                    android:text="TextView"
+                    android:textColor="?attr/colorOnSurface"
+                    android:textSize="14sp" />
             </LinearLayout>
 
-            <TextView
-                    android:id="@+id/textView13"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginStart="10dp"
-                    android:alpha="1"
-                    android:text=">"
-                    android:textSize="30sp"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:alpha="1"
+                android:text=">"
+                android:textColor="?attr/colorOnSurface"
+                android:textSize="24sp" />
         </LinearLayout>
-    </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

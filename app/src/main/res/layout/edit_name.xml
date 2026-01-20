@@ -7,24 +7,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
 
-        <EditText
-            android:id="@+id/edTextNombre"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:ems="10"
             android:hint="@string/nombre"
-            android:inputType="textCapSentences" />
+            app:boxBackgroundMode="outline">
 
-        <ImageButton
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edTextNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textCapSentences" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnFavorito"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
-            app:srcCompat="@android:drawable/btn_star_big_off" />
+            android:contentDescription="@string/favoritas"
+            android:text=""
+            app:backgroundTint="@android:color/transparent"
+            app:icon="@android:drawable/btn_star_big_off"
+            app:iconPadding="0dp"
+            app:iconTint="@color/colorSecondary" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

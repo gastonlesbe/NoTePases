@@ -8,4 +8,9 @@
         android:title="@string/Help"
         android:visible="true"
         app:showAsAction ="always"/>
+    <item
+        android:id="@+id/units"
+        android:title="@string/units_title"
+        android:visible="true"
+        app:showAsAction="never" />
 </menu>

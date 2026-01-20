@@ -22,9 +22,11 @@ import androidx.core.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.android.gms.location.LocationCallback;
+import com.gaston.lesbegueris.notepases.util.DistanceFormatter;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import android.app.Notification;
 
 /**
  * Created by deepshikha on 24/11/16.
@@ -53,6 +55,12 @@ public class Traking extends Service implements LocationListener{
     public static String str_receiver = "servicetutorial.service.receiver";
     private Intent intent;
     private static final String CHANNEL_ID = "tracking_channel";
+    
+    // Variables para almacenar datos de la ubicación
+    private String name = "";
+    private String address = "";
+    private String str_id = "";
+    private String nota = "";
     
     // Variables para actualización dinámica de ubicación
     private long currentUpdateInterval = 60000; // Intervalo actual en milisegundos (inicial: 60 segundos)
@@ -105,7 +113,19 @@ public class Traking extends Service implements LocationListener{
             latitude2 = intent.getDoubleExtra("latitude2", latitude2);
             longitude2 = intent.getDoubleExtra("longitude2", longitude2);
             alerta = intent.getIntExtra("alerta", alerta);
+            // Obtener datos adicionales si están disponibles
+            name = intent.getStringExtra("nombre");
+            if (name == null) name = "";
+            address = intent.getStringExtra("address");
+            if (address == null) address = "";
+            str_id = intent.getStringExtra("str_id");
+            if (str_id == null) str_id = "";
+            nota = intent.getStringExtra("nota");
+            if (nota == null) nota = "";
         }
+
+        // Ensure the service stays alive with a foreground notification
+        startForeground(333, buildNotification(-1));
 
         // Retornar START_STICKY para que el servicio se reinicie si se cierra
         return START_STICKY;
@@ -195,8 +215,12 @@ public class Traking extends Service implements LocationListener{
         mDestination.setLatitude(latitude2);
         mDestination.setLongitude(longitude2);
 
+        // RECALCULAR la distancia cada vez que cambia la ubicación
         float distance = mDestination.distanceTo(location);
         int falta = (int) distance;
+        DistanceFormatter.Display display = DistanceFormatter.formatDistance(this, distance);
+        
+        Log.d(TAG, "Location updated - Distance: " + falta + "m, Alert threshold: " + alerta + "m");
         
         // Actualizar dinámicamente el intervalo según la distancia
         long newInterval = calculateUpdateInterval(distance);
@@ -218,7 +242,10 @@ public class Traking extends Service implements LocationListener{
             reconfigureLocationUpdates(newInterval, minDistance);
         }
         lastDistance = distance; // Actualizar siempre la última distancia
+        
+        // VERIFICAR SI SE ALCANZÓ LA DISTANCIA DE ALARMA (recalculada con la nueva ubicación)
         if (falta < alerta) {
+            Log.d(TAG, "Alarm triggered - Distance: " + falta + "m < Alert: " + alerta + "m");
             Intent alarmIntent = new Intent(Traking.this, Alarma.class);
             alarmIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             NotificationManager notificationManager =
@@ -243,12 +270,17 @@ public class Traking extends Service implements LocationListener{
         trakingOn = true; // Mantener trakingOn como true cuando se muestra la notificación
 
 
+        // ACTUALIZAR LA NOTIFICACIÓN con la nueva distancia calculada
         Intent goApp = new Intent(Traking.this, MapsActivity.class);
         goApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         goApp.putExtra("latitude2", latitude2);
         goApp.putExtra("longitude2", longitude2);
         goApp.putExtra("trakingOn", trakingOn);
         goApp.putExtra("traking", trakingOn); // También agregar como "traking" para compatibilidad
+        goApp.putExtra("nombre", name); // Pasar el nombre
+        goApp.putExtra("address", address); // Pasar la dirección
+        goApp.putExtra("str_id", str_id); // Pasar el ID
+        goApp.putExtra("nota", nota); // Pasar la nota
         goApp.setAction("com.gaston.lesbegueris.notepases");
         
         int flags = PendingIntent.FLAG_UPDATE_CURRENT;
@@ -260,26 +292,49 @@ public class Traking extends Service implements LocationListener{
 
         sendBroadcast(goApp);
 
-        String txtFalta = getString(R.string.falta);
-
+        // ACTUALIZAR LA NOTIFICACIÓN con la distancia recalculada
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(Traking.this, CHANNEL_ID)
                         .setSmallIcon(R.drawable.noti)
-                        .setContentTitle(falta + " mts.")
+                        .setContentTitle(display.value + " " + display.unit) // Distancia actualizada
                         .setContentIntent(pIntent1)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setAutoCancel(false)
-                        .setOngoing(false)
-                //        .setContentText(falta + " mts.")
-                ;
+                        .setOngoing(true)
+                        .setShowWhen(false); // No mostrar timestamp para que se vea más limpia
 
         NotificationManager mNotificationManager =
                 (NotificationManager) getSystemService(
                         Context.NOTIFICATION_SERVICE);
+        // Usar el mismo ID (333) para actualizar la notificación existente
         mNotificationManager.notify(333, mBuilder.build());
+        
+        Log.d(TAG, "Notification updated with distance: " + falta + "m");
 
 
 
+    }
+
+    private Notification buildNotification(int falta) {
+        Intent goApp = new Intent(Traking.this, MapsActivity.class);
+        goApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            flags |= PendingIntent.FLAG_IMMUTABLE;
+        }
+        PendingIntent pIntent = PendingIntent.getActivity(
+                Traking.this, 333, goApp, flags);
+
+        String title = (falta >= 0) ? (falta + " mts.") : getString(R.string.recibiendo);
+        return new NotificationCompat.Builder(Traking.this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.noti)
+                .setContentTitle(title)
+                .setContentIntent(pIntent)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(false)
+                .setOngoing(true)
+                .setShowWhen(false)
+                .build();
     }
 
 

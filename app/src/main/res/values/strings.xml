@@ -26,12 +26,28 @@
     <string name="ultimos">Ultimos</string>
     <string name="favoritas">Favoritas</string>
     <string name="modificanombre">Modifica el Nombre</string>
+    <string name="close">Cerrar</string>
+    <string name="current_distance">Distancia actual</string>
+    <string name="alerta_label">Alerta</string>
+    <string name="meters_short">mts</string>
+    <string name="kilometers_short">km</string>
+    <string name="miles_short">mi</string>
+    <string name="detener">Detener</string>
+    <string name="units_title">Unidad de medida</string>
+    <string name="units_system">Automático (sistema)</string>
+    <string name="units_metric">Metros / Kilómetros</string>
+    <string name="units_imperial">Millas</string>
+    <string name="delete">Eliminar</string>
+    <string name="delete_address_title">Eliminar dirección</string>
+    <string name="delete_address_message">Este cambio no se puede deshacer. ¿Querés borrar la dirección?</string>
+    <string name="delete_confirm">Borrar</string>
     
     <!-- Appodeal App Key -->
     <string name="appodeal_app_key">71d3e7b55bfb2243b36add91bcfa88dec0c86253c9a6d983</string>
     
     <!-- AdMob App ID (required by Appodeal since it uses AdMob as one of its ad networks) -->
     <!-- Using Google's test App ID for development -->
-    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
+    <string name="admob_app_id">ca-app-pub-9841764898906750~1231798265</string>
+    <string name="admob_interstitial_id" translatable="false">ca-app-pub-9841764898906750/2203984675</string>
 
 </resources>
