@@ -2,11 +2,11 @@
 <set xmlns:android="http://schemas.android.com/apk/res/android">
     <rotate xmlns:android="http://schemas.android.com/apk/res/android"
         android:duration="100"
-    android:fromDegrees="-5"
-    android:pivotX="50%"
-    android:pivotY="50%"
-    android:repeatCount="10"
-    android:repeatMode="reverse"
-    android:toDegrees="5" />        <!-- how far to swing right -->
+        android:fromDegrees="-5"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:repeatCount="infinite"
+        android:repeatMode="reverse"
+        android:toDegrees="5" />        <!-- how far to swing right -->
 
 </set>

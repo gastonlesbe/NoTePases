@@ -1,7 +1,7 @@
 package com.gaston.lesbegueris.notepases;
 
 import android.annotation.SuppressLint;
-import androidx.appcompat.app.AlertDialog;
+import android.app.AlertDialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -28,10 +28,10 @@ import android.os.Looper;
 import android.preference.PreferenceManager;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
 import android.os.Bundle;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -39,23 +39,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.SimpleCursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.ads.AdError;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.FullScreenContentCallback;
-import com.google.android.gms.ads.LoadAdError;
-import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.interstitial.InterstitialAd;
-import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.google.android.material.textfield.TextInputEditText;
-import com.gaston.lesbegueris.notepases.util.DistanceFormatter;
 
 import com.google.android.gms.location.*;
 import com.google.android.gms.maps.CameraUpdate;
@@ -84,9 +74,8 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     private GoogleMap mMap;
     String address, txtlatitude2, txtlongitude2, destino, name, str_id, nota;
     double latitude2, longitude2, latitude1, longitude1;
-    TextView txtBuscar, txtAddress, txtStart, txtAlertUnit;
-    TextInputEditText txtDistancia;
-    MaterialButton btnBuscar, btnEdit, btnClose;
+    TextView txtBuscar, txtDistancia, txtAddress, txtNombre;
+    ImageButton btnBuscar, btnEdit, btnClose;
     protected GoogleApiClient mGoogleApiClient;
 
     boolean isGPSEnable = false;
@@ -124,7 +113,6 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     private Cursor cursor;
 
     private FusedLocationProviderClient mFusedLocationClient;
-    private InterstitialAd interstitialAd;
 
     private LocationRequest mLocationRequest;
     private LocationCallback mLocationCallback;
@@ -140,9 +128,6 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
-
-        MobileAds.initialize(this);
-        loadInterstitial();
 
         mFusedLocationClient = getFusedLocationProviderClient(this);
         startLocationUpdates();
@@ -183,10 +168,6 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             if (intentNota != null) {
                 nota = intentNota;
             }
-            if (intent.getBooleanExtra("fromSelection", false)) {
-                trakingOn = false;
-                sharedpreferences.edit().putBoolean("trakingOn", false).apply();
-            }
         }
         SupportMapFragment mapFragment = (SupportMapFragment)
                 getSupportFragmentManager()
@@ -195,17 +176,13 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
 
         txtBuscar = (TextView) findViewById(R.id.txtDireccion);
-        txtDistancia = (TextInputEditText) findViewById(R.id.txtDistancia);
+        txtDistancia = (TextView) findViewById(R.id.txtDistancia);
         // txtDistancia.setFocusable(false);
         txtAddress = (TextView) findViewById(R.id.txtaddress);
-        txtAlertUnit = (TextView) findViewById(R.id.textView12);
-        if (txtAlertUnit != null) {
-            txtAlertUnit.setText(DistanceFormatter.getAlertUnit(this));
-        }
-        // Nombre oculto en la UI; no se muestra en este layout
-        btnBuscar = (MaterialButton) findViewById(R.id.btnBuscar);
-        txtStart = (TextView) findViewById(R.id.txtStart);
-        btnEdit = (MaterialButton) findViewById(R.id.btnEdit);
+        txtNombre = (TextView) findViewById(R.id.txtnombre);
+        txtNombre.setText(R.string.nombre);
+        btnBuscar = (ImageButton) findViewById(R.id.btnBuscar);
+        btnEdit = (ImageButton) findViewById(R.id.btnEdit);
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,7 +190,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                 editarNombre();
             }
         });
-        btnClose = (MaterialButton) findViewById(R.id.btnClose);
+        btnClose = (ImageButton) findViewById(R.id.btnClose);
         btnClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -236,13 +213,11 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
 
         if (trakingOn == false) {
-            btnBuscar.setIconResource(android.R.drawable.ic_media_play);
-            if (txtStart != null) {
-                txtStart.setText(R.string.inicia);
-            }
+            btnBuscar.setImageResource(R.mipmap.start);
             btnBuscar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     distancia();
                     starttraking();
                     guardarTemp();
@@ -253,52 +228,24 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                     //fn_getlocation();
 
                     trakingOn = true;
-                    // Cambiar el botón a "stop" inmediatamente
-                    btnBuscar.setIconResource(android.R.drawable.ic_media_pause);
-                    if (txtStart != null) {
-                        txtStart.setText(R.string.detener);
-                    }
-                    // Actualizar el listener para que ahora detenga el tracking
-                    btnBuscar.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            stopTraking();
-                        }
-                    });
-                    // Reiniciar la actividad para reflejar el cambio de estado
-                    Intent intent = new Intent(MapsActivity.this, MapsActivity.class);
-                    intent.putExtra("trakingOn", true);
-                    intent.putExtra("traking", true);
-                    intent.putExtra("fromSelection", false);
-                    intent.putExtra("latitude2", latitude2);
-                    intent.putExtra("longitude2", longitude2);
-                    if (name != null) {
-                        intent.putExtra("nombre", name);
-                    }
-                    if (address != null) {
-                        intent.putExtra("address", address);
-                    }
-                    if (str_id != null) {
-                        intent.putExtra("str_id", str_id);
-                    }
-                    if (nota != null) {
-                        intent.putExtra("nota", nota);
-                    }
+                    btnBuscar.setImageResource(R.mipmap.stop);
+                    Intent intent = getIntent();
                     finish();
                     startActivity(intent);
                 }
             });
         } else {
-            btnBuscar.setIconResource(android.R.drawable.ic_media_pause);
-            if (txtStart != null) {
-                txtStart.setText(R.string.detener);
-            }
+            btnBuscar.setImageResource(R.mipmap.stop);
             btnBuscar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
                     stopTraking();
+
                 }
             });
+
+
         }
     }
 
@@ -320,106 +267,34 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     }
     
     private void cerrar() {
-        showInterstitialThenReturnToMain();
-    }
-
-    private void loadInterstitial() {
-        AdRequest request = new AdRequest.Builder().build();
-        InterstitialAd.load(
-                this,
-                getString(R.string.admob_interstitial_id),
-                request,
-                new InterstitialAdLoadCallback() {
-                    @Override
-                    public void onAdLoaded(InterstitialAd ad) {
-                        interstitialAd = ad;
-                    }
-
-                    @Override
-                    public void onAdFailedToLoad(LoadAdError adError) {
-                        interstitialAd = null;
-                    }
-                });
-    }
-
-    private void showInterstitialThenReturnToMain() {
-        if (interstitialAd == null) {
-            goToMain();
-            return;
-        }
-        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-            @Override
-            public void onAdDismissedFullScreenContent() {
-                interstitialAd = null;
-                loadInterstitial();
-                goToMain();
-            }
-
-            @Override
-            public void onAdFailedToShowFullScreenContent(AdError adError) {
-                interstitialAd = null;
-                goToMain();
-            }
-        });
-        interstitialAd.show(this);
-    }
-
-    private void goToMain() {
         Intent intent = new Intent(MapsActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    private void updateCameraToBounds(boolean animate) {
-        if (mMap == null || markerDestino == null) {
-            return;
-        }
-        if (markerYo != null) {
-            LatLngBounds.Builder builder = new LatLngBounds.Builder();
-            builder.include(markerYo.getPosition());
-            builder.include(markerDestino.getPosition());
-            LatLngBounds bounds = builder.build();
-            int padding = 120; // padding en pixels
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
-            if (animate) {
-                mMap.animateCamera(cameraUpdate);
-            } else {
-                mMap.moveCamera(cameraUpdate);
-            }
-            mMap.setOnMapLoadedCallback(() -> mMap.animateCamera(cameraUpdate));
-        } else {
-            CameraUpdate center = CameraUpdateFactory.newLatLng(markerDestino.getPosition());
-            CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
-            mMap.moveCamera(center);
-            if (animate) {
-                mMap.animateCamera(zoom);
-            }
-        }
-    }
-
     private void editarNombre() {
-        MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(this);
+        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         final View dialogView = inflater.inflate(R.layout.edit_name, null);
         dialogBuilder.setView(dialogView);
 
         final EditText edt = (EditText) dialogView.findViewById(R.id.edTextNombre);
         edt.setText(name);
-        final MaterialButton btnFavorito = (MaterialButton) dialogView.findViewById(R.id.btnFavorito);
+        final ImageButton btnFavorito = (ImageButton) dialogView.findViewById(R.id.btnFavorito);
         if (nota == null) {
             btnFavorito.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    btnFavorito.setIconResource(android.R.drawable.btn_star_big_on);
+                    btnFavorito.setImageResource(android.R.drawable.btn_star_big_on);
                     nota = "fav";
                 }
             });
         } else {
-            btnFavorito.setIconResource(android.R.drawable.btn_star_big_on);
+            btnFavorito.setImageResource(android.R.drawable.btn_star_big_on);
             btnFavorito.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    btnFavorito.setIconResource(android.R.drawable.btn_star_big_off);
+                    btnFavorito.setImageResource(android.R.drawable.btn_star_big_off);
                     nota = null;
                 }
             });
@@ -444,7 +319,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
     private void favorito() {
 
-        // No mostrar nombre en la UI
+        txtNombre.setText(name);
 
         manager = new DataBaseManager(MapsActivity.this);
         String txtlatitude2 = String.valueOf(latitude2);
@@ -492,18 +367,13 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
             //startLocationUpdates();
             mLocation = location;
-            latitude1 = location.getLatitude();
-            longitude1 = location.getLongitude();
             myLocation = new LatLng(latitude1, longitude1);
-            if (markerYo == null) {
-                markerYo = mMap.addMarker(new MarkerOptions()
-                        .position(myLocation)
-                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                );
-            } else {
-                markerYo.setPosition(myLocation);
-            }
-            updateCameraToBounds(true);
+            mMap.addMarker(new MarkerOptions()
+                    .position(myLocation)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+            );
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
             Log.d("location", "Latitude:" + mLocation.getLatitude() + "\n" + "Longitude:" + mLocation.getLongitude());
             distancia();
 
@@ -513,20 +383,13 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         public void onStatusChanged(String provider, int status, Bundle extras) {
 
             mLocation = location;
-            if (location != null) {
-                latitude1 = location.getLatitude();
-                longitude1 = location.getLongitude();
-                myLocation = new LatLng(latitude1, longitude1);
-                if (markerYo == null) {
-                    markerYo = mMap.addMarker(new MarkerOptions()
-                            .position(myLocation)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
-                    );
-                } else {
-                    markerYo.setPosition(myLocation);
-                }
-                updateCameraToBounds(true);
-            }
+            myLocation = new LatLng(latitude1, longitude1);
+            markerYo = mMap.addMarker(new MarkerOptions()
+                    .position(myLocation)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+            );
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
             Log.d("location", "Latitude:" + mLocation.getLatitude() + "\n" + "Longitude:" + mLocation.getLongitude());
             distancia();
         }
@@ -633,7 +496,10 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                                     .position(myPosition)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
                             );
-                            updateCameraToBounds(true);
+                            CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(latitude1, longitude1));
+                            CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+                            mMap.moveCamera(center);
+                            mMap.animateCamera(zoom);
 
                             distancia();
                         }
@@ -650,7 +516,24 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                 .title("Destino")
                 .icon(BitmapDescriptorFactory.defaultMarker())
                 .draggable(true));
-        updateCameraToBounds(false);
+        
+        // Ajustar la cámara para mostrar tanto la ubicación actual como el destino
+        if (location != null && latitude1 != 0 && longitude1 != 0) {
+            // Si tenemos la ubicación actual, mostrar ambos puntos
+            LatLngBounds.Builder builder = new LatLngBounds.Builder();
+            builder.include(new LatLng(latitude1, longitude1));
+            builder.include(position);
+            LatLngBounds bounds = builder.build();
+            int padding = 100; // padding en pixels
+            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+            mMap.animateCamera(cameraUpdate);
+        } else {
+            // Si no tenemos la ubicación actual, solo mostrar el destino
+            CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(latitude2, longitude2));
+            CameraUpdate zoom = CameraUpdateFactory.zoomTo(15);
+            mMap.moveCamera(center);
+            mMap.animateCamera(zoom);
+        }
         CircleOptions circleOptions = new CircleOptions()
                 .center(position)
                 .radius(Double.parseDouble(txtDistancia.getText().toString()))
@@ -664,19 +547,13 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         try {
             addresses = geocoder.getFromLocation(
                     markerDestino.getPosition().latitude, markerDestino.getPosition().longitude, 1);
-            // Verificar que la lista no esté vacía antes de acceder al índice 0
-            if (addresses != null && !addresses.isEmpty() && addresses.get(0) != null) {
-                address = addresses.get(0).getAddressLine(0);
-            } else {
-                Log.w(TAG, "No addresses found for location");
-                address = null;
-            }
+            address = addresses.get(0).getAddressLine(0);
         } catch (IOException e) {
-            Log.e(TAG, "Geocoding error", e);
             e.printStackTrace();
-            address = null;
         }
-        if (address != null) {
+        if (address != null && address.contains(",")) {
+            destino = address.substring(0, address.indexOf(","));
+        } else if (address != null) {
             destino = address;
         } else {
             destino = "";
@@ -684,7 +561,9 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         if (txtAddress != null) {
             txtAddress.setText(destino);
         }
-        // No mostrar nombre en la UI
+        if (txtNombre != null && name != null) {
+            txtNombre.setText(name);
+        }
         distancia();
         mMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
 
@@ -697,10 +576,6 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             @Override
             public void onMarkerDragEnd(Marker arg0) {
                 // TODO Auto-generated method stub
-                if (markerDestino == null) {
-                    Log.e(TAG, "markerDestino is null in onMarkerDragEnd");
-                    return;
-                }
                 LatLng markerLocation = markerDestino.getPosition();
                 //Toast.makeText(MapsActivity.this, markerLocation.toString(), Toast.LENGTH_LONG).show();
                 //  Log.d("Marker", "finished");
@@ -711,35 +586,17 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                 try {
                     addresses = geocoder.getFromLocation(
                             markerDestino.getPosition().latitude, markerDestino.getPosition().longitude, 1);
-                    // Verificar que la lista no esté vacía antes de acceder al índice 0
-                    if (addresses != null && !addresses.isEmpty() && addresses.get(0) != null) {
-                        address = addresses.get(0).getAddressLine(0);
-                    } else {
-                        Log.w(TAG, "No addresses found in onMarkerDragEnd");
-                        address = markerDestino.getPosition().latitude + ", " + markerDestino.getPosition().longitude;
-                    }
+                    address = addresses.get(0).getAddressLine(0);
                 } catch (IOException e) {
-                    Log.e(TAG, "Geocoding error in onMarkerDragEnd", e);
                     e.printStackTrace();
-                    address = markerDestino.getPosition().latitude + ", " + markerDestino.getPosition().longitude;
                 }
-                
-                // Procesar la dirección de forma segura
-                if (address != null) {
-                    destino = address;
-                } else {
-                    destino = "";
-                }
+                destino = address.substring(0, address.indexOf(","));
 
-                if (txtAddress != null) {
-                    txtAddress.setText(destino);
-                }
+                txtAddress.setText(destino);
                 latitude2 = markerDestino.getPosition().latitude;
                 longitude2 = markerDestino.getPosition().longitude;
-                if (address != null) {
-                    Toast.makeText(MapsActivity.this, address,
-                            Toast.LENGTH_SHORT).show();
-                }
+                Toast.makeText(MapsActivity.this, address,
+                        Toast.LENGTH_SHORT).show();
                 CircleOptions circleOptions = new CircleOptions()
                         .center(markerLocation)
                         .radius(Double.parseDouble(txtDistancia.getText().toString()))
@@ -790,16 +647,6 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         locationManager = (LocationManager)getApplicationContext().getSystemService(LOCATION_SERVICE);
         isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         isNetworkEnable = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-        
-        // Remover listeners anteriores antes de registrar nuevos para evitar duplicados
-        if (locationManager != null) {
-            try {
-                locationManager.removeUpdates(this);
-            } catch (SecurityException e) {
-                Log.e(TAG, "Error removing previous location updates", e);
-            }
-        }
-        
         if (!isGPSEnable && !isNetworkEnable) {
 
         } else {
@@ -901,58 +748,34 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         settingsClient.checkLocationSettings(locationSettingsRequest);
 
         // new Google API SDK v11 uses getFusedLocationProviderClient(this)
-        // Guardar la referencia del callback para poder removerlo después
-        mLocationCallback = new LocationCallback() {
-            @Override
-            public void onLocationResult(LocationResult locationResult) {
-                // do work here
-                if (locationResult != null && locationResult.getLastLocation() != null) {
-                    onLocationChanged(locationResult.getLastLocation());
-                    // Solo calcular distancia si markerDestino está inicializado
-                    if (markerDestino != null) {
+        getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, new LocationCallback() {
+                    @Override
+                    public void onLocationResult(LocationResult locationResult) {
+                        // do work here
+                        onLocationChanged(locationResult.getLastLocation());
                         distancia();
                     }
-                }
-            }
-        };
-        getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, mLocationCallback,
+                },
                 Looper.myLooper());
     }
 
     public void starttraking(){
-        // Verificar que markerDestino no sea null
-        if (markerDestino == null) {
-            Log.e(TAG, "markerDestino is null, cannot start tracking");
-            Toast.makeText(this, "Error: No se puede iniciar el seguimiento", Toast.LENGTH_SHORT).show();
-            return;
-        }
 
         Geocoder geocoder;
         List<Address> addresses;
         geocoder = new Geocoder(this, Locale.getDefault());
         try {
             addresses = geocoder.getFromLocation(markerDestino.getPosition().latitude, markerDestino.getPosition().longitude, 1);
-            // Verificar que la lista no esté vacía antes de acceder al índice 0
-            if (addresses != null && !addresses.isEmpty() && addresses.get(0) != null) {
-                address = addresses.get(0).getAddressLine(0);
-            } else {
-                Log.w(TAG, "No addresses found for location in starttraking");
-                // Usar coordenadas como dirección si no se encuentra
-                address = markerDestino.getPosition().latitude + ", " + markerDestino.getPosition().longitude;
-            }
+            address = addresses.get(0).getAddressLine(0);
         } catch (IOException e) {
-            Log.e(TAG, "Geocoding error in starttraking", e);
             e.printStackTrace();
-            // Usar coordenadas como dirección si hay error
-            address = markerDestino.getPosition().latitude + ", " + markerDestino.getPosition().longitude;
         }
 
 
        // trakingOn = true;
 
-        // Verificar que markerDestino no sea null (ya se verificó al inicio del método)
         CharSequence charAlerta = txtDistancia.getText();
-        alerta = DistanceFormatter.toAlertMeters(this, charAlerta.toString());
+        alerta = parseInt(charAlerta.toString());
         String destination = String.valueOf(markerDestino.getPosition());
         Intent intent = new Intent(this, Traking.class);
         //intent.putExtra("marker", marker);
@@ -962,10 +785,8 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
         intent.putExtra("latitude2",  markerDestino.getPosition().latitude);
         intent.putExtra("longitude2",  markerDestino.getPosition().longitude);
-        intent.putExtra("address", address); // Pasar la dirección
-        intent.putExtra("nombre", name); // Pasar el nombre
-        intent.putExtra("str_id", str_id); // Pasar el ID si existe
-        intent.putExtra("nota", nota); // Pasar la nota (favorito)
+       // intent.putExtra("address", address);
+        //intent.putExtra("distancia", b);
         intent.putExtra("trakingOn", true);
         intent.putExtra("alerta", alerta);
 
@@ -974,11 +795,11 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
         try {
             if (cursor.getCount() != 0) {
-                startTrackingService(intent);
+                startService(intent);
             } else {
                 // Insertar nueva ubicación con el estado de favorito si existe
                 manager.insertar(name, txtlatitude2, txtlongitude2, address, null, nota);
-                startTrackingService(intent);
+                startService(intent);
                 finish();
             }
         } finally {
@@ -997,35 +818,21 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         editor.putString("txtlatitude2", txtlatitude2);
         editor.putString("alerta", String.valueOf(alerta));
         editor.putBoolean("trakingOn", true);
-        editor.putString("name", name != null ? name : "");
+        editor.putString("name", txtNombre.getText().toString());
         editor.apply();
         editor.commit();
 
     }
 
-    private void startTrackingService(Intent intent) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            ContextCompat.startForegroundService(this, intent);
-        } else {
-            startService(intent);
-        }
-    }
-
     public void distancia(){
-        // Verificar que markerDestino no sea null
-        if (markerDestino == null) {
-            Log.e(TAG, "markerDestino is null, cannot calculate distance");
-            if (txtBuscar != null) {
-                txtBuscar.setText(getString(R.string.recibiendo));
-            }
-            return;
-        }
 
         Location temp = new Location("");
         double marcadorLat = markerDestino.getPosition().latitude;
         double marcadorLon = markerDestino.getPosition().longitude;
         temp.setLatitude(marcadorLat);
         temp.setLongitude(marcadorLon);
+
+
 
         Location yo = new Location("");
         yo.setLatitude(latitude1);
@@ -1034,13 +841,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         float[] results = new float[1];
         Location.distanceBetween( markerDestino.getPosition().latitude,  markerDestino.getPosition().longitude,
                 latitude1, longitude1, results);
-        
-        // Verificar que location no sea null antes de usarlo
-        if (location != null) {
-            dist = temp.distanceTo(location);
-        } else {
-            dist = results[0];
-        }
+        dist = temp.distanceTo(location);
         distance = results[0];
         b = (int) dist;
 
@@ -1048,97 +849,25 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             txtBuscar.setText(R.string.recibiendo);
         }
 
-        DistanceFormatter.Display display = DistanceFormatter.formatDistance(this, distance);
-        txtBuscar.setText(display.value + " " + display.unit);
+        txtBuscar.setText(b + " Mts");
 
 
     }
 
     protected void stopLocationUpdates() {
-        // Remover LocationCallback del FusedLocationProviderClient
-        if (mFusedLocationClient != null && mLocationCallback != null) {
-            try {
-                mFusedLocationClient.removeLocationUpdates(mLocationCallback);
-                Log.d(TAG, "FusedLocationProviderClient location updates removed");
-            } catch (SecurityException e) {
-                Log.e(TAG, "Error removing FusedLocationProviderClient updates", e);
-            }
-        }
-        
-        // Remover LocationManager listeners
-        if (locationManager != null) {
-            try {
-                locationManager.removeUpdates(this);
-                Log.d(TAG, "LocationManager location updates removed");
-            } catch (SecurityException e) {
-                Log.e(TAG, "Error removing LocationManager updates", e);
-            }
-        }
-        
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(
                     mGoogleApiClient, (com.google.android.gms.location.LocationListener) this);
         }
-    }
-    
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Restaurar listeners si el tracking está activo
-        if (trakingOn && mLocationRequest != null) {
-            startLocationUpdates();
-        }
-    }
-    
-    @Override
-    protected void onPause() {
-        super.onPause();
-        // Remover listeners cuando la actividad se pausa para evitar consumo innecesario
-        // No remover si el tracking está activo (el servicio Traking se encarga de eso)
-        if (!trakingOn) {
-            stopLocationUpdates();
-        }
-    }
-    
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Siempre remover todos los listeners cuando la actividad se destruye
-        stopLocationUpdates();
+
     }
     public void stopTraking(){
-        showInterstitialThenStopTracking();
-    }
-
-    private void showInterstitialThenStopTracking() {
-        if (interstitialAd == null) {
-            stopTrackingSilently();
-            goToMain();
-            return;
-        }
-        interstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
-            @Override
-            public void onAdDismissedFullScreenContent() {
-                interstitialAd = null;
-                loadInterstitial();
-                stopTrackingSilently();
-                goToMain();
-            }
-
-            @Override
-            public void onAdFailedToShowFullScreenContent(AdError adError) {
-                interstitialAd = null;
-                stopTrackingSilently();
-                goToMain();
-            }
-        });
-        interstitialAd.show(MapsActivity.this);
-    }
-
-    private void stopTrackingSilently() {
         NotificationManager notificationManager =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.cancel(333);
+        Intent intent = new Intent(this, MainActivity.class); startActivity(intent);
+        finish();
+        startActivity(intent);
         Intent j = new Intent(this, Traking.class);
         stopService(j);
 
@@ -1185,21 +914,14 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     public void startNotification(){
 
        // String distance = String.valueOf(b);
-        DistanceFormatter.Display display = DistanceFormatter.formatDistance(this, distance);
+        int falta = (int)distance;
         trakingOn = true;
         Intent goApp = new Intent (this, MapsActivity.class);
         goApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         goApp.putExtra("trakingOn", trakingOn);
         goApp.putExtra("traking", trakingOn); // También agregar como "traking" para compatibilidad
-        // Verificar que markerDestino no sea null antes de usar
-        if (markerDestino != null) {
-            goApp.putExtra("latitude2",  markerDestino.getPosition().latitude);
-            goApp.putExtra("longitude2", markerDestino.getPosition().longitude);
-        } else {
-            // Usar las coordenadas guardadas si markerDestino es null
-            goApp.putExtra("latitude2", latitude2);
-            goApp.putExtra("longitude2", longitude2);
-        }
+        goApp.putExtra("latitude2",  markerDestino.getPosition().latitude);
+        goApp.putExtra("longitude2", markerDestino.getPosition().longitude);
         if (name != null) {
             goApp.putExtra("nombre", name);
         }
@@ -1216,10 +938,11 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         PendingIntent pIntent1 = PendingIntent.getActivity(
                 this, 333, goApp, flags);
 
+        String txtFalta = getString(R.string.falta);
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(MapsActivity.this, CHANNEL_ID)
                         .setSmallIcon(R.drawable.noti)
-                        .setContentTitle(display.value + " " + display.unit)
+                        .setContentTitle(falta+" mts.")
                         .setContentIntent(pIntent1)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setAutoCancel(false)
