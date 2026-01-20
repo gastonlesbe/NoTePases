@@ -14,8 +14,10 @@
         <item name="android:colorBackground">@color/colorBackground</item>
 
         <!-- System UI -->
-        <item name="android:statusBarColor">@color/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/colorSurface</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:navigationBarColor">@color/colorSurface</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="TabWidgetTheme" parent="ThemeOverlay.MaterialComponents">
