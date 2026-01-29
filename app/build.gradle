@@ -20,8 +20,8 @@ android {
         applicationId "com.gaston.lesbegueris.notepases"
         minSdkVersion 23
         targetSdkVersion 35
-        versionCode 14
-        versionName '1.14'
+        versionCode 15
+        versionName '1.15'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // Enabling multidex support.
         multiDexEnabled true

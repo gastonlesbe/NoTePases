@@ -26,6 +26,8 @@ import com.google.android.gms.location.LocationCallback;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import com.gaston.lesbegueris.notepases.util.DistanceFormatter;
+
 /**
  * Created by deepshikha on 24/11/16.
  */
@@ -53,6 +55,8 @@ public class Traking extends Service implements LocationListener{
     public static String str_receiver = "servicetutorial.service.receiver";
     private Intent intent;
     private static final String CHANNEL_ID = "tracking_channel";
+    private static final int NOTIFICATION_ID = 333;
+    private boolean isForegroundStarted = false;
     
     // Variables para actualización dinámica de ubicación
     private long currentUpdateInterval = 60000; // Intervalo actual en milisegundos (inicial: 60 segundos)
@@ -105,6 +109,11 @@ public class Traking extends Service implements LocationListener{
             latitude2 = intent.getDoubleExtra("latitude2", latitude2);
             longitude2 = intent.getDoubleExtra("longitude2", longitude2);
             alerta = intent.getIntExtra("alerta", alerta);
+        }
+
+        if (!isForegroundStarted) {
+            startForeground(NOTIFICATION_ID, buildNotification(null).build());
+            isForegroundStarted = true;
         }
 
         // Retornar START_STICKY para que el servicio se reinicie si se cierra
@@ -243,40 +252,7 @@ public class Traking extends Service implements LocationListener{
         trakingOn = true; // Mantener trakingOn como true cuando se muestra la notificación
 
 
-        Intent goApp = new Intent(Traking.this, MapsActivity.class);
-        goApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        goApp.putExtra("latitude2", latitude2);
-        goApp.putExtra("longitude2", longitude2);
-        goApp.putExtra("trakingOn", trakingOn);
-        goApp.putExtra("traking", trakingOn); // También agregar como "traking" para compatibilidad
-        goApp.setAction("com.gaston.lesbegueris.notepases");
-        
-        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            flags |= PendingIntent.FLAG_IMMUTABLE;
-        }
-        PendingIntent pIntent1 = PendingIntent.getActivity(
-                Traking.this, 333, goApp, flags);
-
-        sendBroadcast(goApp);
-
-        String txtFalta = getString(R.string.falta);
-
-        NotificationCompat.Builder mBuilder =
-                new NotificationCompat.Builder(Traking.this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.noti)
-                        .setContentTitle(falta + " mts.")
-                        .setContentIntent(pIntent1)
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        .setAutoCancel(false)
-                        .setOngoing(false)
-                //        .setContentText(falta + " mts.")
-                ;
-
-        NotificationManager mNotificationManager =
-                (NotificationManager) getSystemService(
-                        Context.NOTIFICATION_SERVICE);
-        mNotificationManager.notify(333, mBuilder.build());
+        updateNotification(distance);
 
 
 
@@ -402,6 +378,52 @@ public class Traking extends Service implements LocationListener{
                 Log.e(TAG, "Error removing location updates in onDestroy", e);
             }
         }
+    }
+
+    private NotificationCompat.Builder buildNotification(Float distanceMeters) {
+        Intent goApp = new Intent(Traking.this, MapsActivity.class);
+        goApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        goApp.putExtra("latitude2", latitude2);
+        goApp.putExtra("longitude2", longitude2);
+        goApp.putExtra("trakingOn", true);
+        goApp.putExtra("traking", true); // compat
+        goApp.setAction("com.gaston.lesbegueris.notepases");
+
+        int flags = PendingIntent.FLAG_UPDATE_CURRENT;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            flags |= PendingIntent.FLAG_IMMUTABLE;
+        }
+        PendingIntent pIntent1 = PendingIntent.getActivity(
+                Traking.this, NOTIFICATION_ID, goApp, flags);
+
+        NotificationCompat.Builder builder =
+                new NotificationCompat.Builder(Traking.this, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.noti)
+                        .setContentIntent(pIntent1)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setOnlyAlertOnce(true)
+                        .setAutoCancel(false)
+                        .setOngoing(true);
+
+        if (distanceMeters == null) {
+            builder.setContentTitle(getString(R.string.app_name))
+                    .setContentText(getString(R.string.recibiendo));
+        } else {
+            DistanceFormatter.Display display = DistanceFormatter.formatDistance(this, distanceMeters);
+            String txtFalta = getString(R.string.falta);
+            builder.setContentTitle(txtFalta + " " + display.value + " " + display.unit);
+        }
+
+        return builder;
+    }
+
+    private void updateNotification(float distanceMeters) {
+        NotificationManager mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        if (mNotificationManager == null) {
+            return;
+        }
+        mNotificationManager.notify(NOTIFICATION_ID, buildNotification(distanceMeters).build());
     }
 
     private class TimerTaskToGetLocation extends TimerTask{

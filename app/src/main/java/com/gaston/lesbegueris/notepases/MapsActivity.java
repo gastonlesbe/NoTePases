@@ -860,11 +860,11 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
         try {
             if (cursor.getCount() != 0) {
-                startService(intent);
+                ContextCompat.startForegroundService(this, intent);
             } else {
                 // Insertar nueva ubicación con el estado de favorito si existe
                 manager.insertar(name, txtlatitude2, txtlongitude2, address, null, nota);
-                startService(intent);
+                ContextCompat.startForegroundService(this, intent);
             }
         } finally {
             // Cerrar el cursor
