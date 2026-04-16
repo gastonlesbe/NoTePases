@@ -37,4 +37,7 @@
     <string name="delete_address_title">Delete address</string>
     <string name="delete_address_message">This change can\'t be undone. Delete the address?</string>
     <string name="delete_confirm">Delete</string>
+    <string name="griscal_promo_message">Organize your family, pets, home and vehicles — all in one app. Free to try.</string>
+    <string name="griscal_promo_cta">Try Griscal</string>
+    <string name="griscal_promo_dismiss">Maybe later</string>
 </resources>

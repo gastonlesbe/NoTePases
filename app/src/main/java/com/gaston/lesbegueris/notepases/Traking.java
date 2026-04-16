@@ -81,11 +81,25 @@ public class Traking extends Service implements LocationListener{
         super.onCreate();
         
         createNotificationChannel();
-
-        mTimer = new Timer();
-        mTimer.schedule(new TimerTaskToGetLocation(),20000,notify_interval);
         intent = new Intent(str_receiver);
         fn_getlocation();
+
+        // Sincronización (re-registrar location updates) según distancia
+        long syncInterval = Math.max(1000, currentUpdateInterval);
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTaskToGetLocation(), syncInterval, syncInterval);
+    }
+
+    private void rescheduleSyncTimer(long newIntervalMs) {
+        if (newIntervalMs <= 0) {
+            return;
+        }
+        long syncInterval = Math.max(1000, newIntervalMs);
+        if (mTimer != null) {
+            mTimer.cancel();
+        }
+        mTimer = new Timer();
+        mTimer.schedule(new TimerTaskToGetLocation(), syncInterval, syncInterval);
     }
     
     private void createNotificationChannel() {
@@ -125,26 +139,17 @@ public class Traking extends Service implements LocationListener{
      * Cuanto más cerca, más frecuente la actualización
      */
     private long calculateUpdateInterval(float distance) {
-        if (distance > 2000) {
-            // Muy lejos (>2km): actualizar cada 60 segundos
+        if (distance > 3000) {
+            // Muy lejos (>3km): actualizar cada 60 segundos
             return 60000;
-        } else if (distance > 1000) {
-            // Lejos (1-2km): actualizar cada 30 segundos
+        } else if (distance >= 2000) {
+            // 2km-3km: actualizar cada 30 segundos
             return 30000;
-        } else if (distance > 500) {
-            // Medio (500m-1km): actualizar cada 15 segundos
-            return 15000;
-        } else if (distance > 200) {
-            // Cerca (200-500m): actualizar cada 10 segundos
+        } else if (distance >= 100) {
+            // 100m-2km: actualizar cada 10 segundos
             return 10000;
-        } else if (distance > 100) {
-            // Muy cerca (100-200m): actualizar cada 5 segundos
-            return 5000;
-        } else if (distance > 50) {
-            // Casi llegando (50-100m): actualizar cada 3 segundos
-            return 3000;
         } else {
-            // Muy cerca (<50m): actualizar cada 1 segundo para detectar llegada
+            // <100m: actualizar cada 1 segundo para detectar llegada
             return 1000;
         }
     }
@@ -209,7 +214,12 @@ public class Traking extends Service implements LocationListener{
         
         // Actualizar dinámicamente el intervalo según la distancia
         long newInterval = calculateUpdateInterval(distance);
-        float minDistance = Math.max(5, distance / 20); // Distancia mínima: 5m o 5% de la distancia
+        // Distancia mínima para que el proveedor entregue callbacks.
+        // Queremos que el "minTime" funcione lo más posible, por eso evitamos filtrar por distancia
+        // cuando estamos en 10s/30s/60s.
+        float minDistance = (distance < 100)
+                ? 5f
+                : 0f;
         
         // Solo reconfigurar si el intervalo cambió significativamente o la distancia cambió mucho
         boolean shouldReconfigure = false;
@@ -224,7 +234,10 @@ public class Traking extends Service implements LocationListener{
         }
         
         if (shouldReconfigure) {
+            Log.d(TAG, "distance=" + distance + "m => interval=" + newInterval + "ms");
             reconfigureLocationUpdates(newInterval, minDistance);
+            // También reprogramar la "sync" para que coincida con el intervalo deseado
+            rescheduleSyncTimer(newInterval);
         }
         lastDistance = distance; // Actualizar siempre la última distancia
         if (falta < alerta) {
@@ -305,7 +318,9 @@ public class Traking extends Service implements LocationListener{
         
         // Calcular intervalo y distancia mínima iniciales
         long initialInterval = calculateUpdateInterval(initialDistance);
-        float minDistance = Math.max(5, initialDistance / 20);
+        float minDistance = (initialDistance < 100)
+                ? 5f
+                : 0f;
         
         // Actualizar variables globales
         currentUpdateInterval = initialInterval;

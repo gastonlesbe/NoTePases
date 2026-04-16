@@ -50,4 +50,8 @@
     <string name="admob_app_id">ca-app-pub-9841764898906750~1231798265</string>
     <string name="admob_interstitial_id" translatable="false">ca-app-pub-9841764898906750/2203984675</string>
 
+    <string name="griscal_promo_message">Organizá tu familia, mascotas, hogar y vehículos — todo en una sola app. Gratis para probar.</string>
+    <string name="griscal_promo_cta">Probar Griscal</string>
+    <string name="griscal_promo_dismiss">Ahora no</string>
+
 </resources>

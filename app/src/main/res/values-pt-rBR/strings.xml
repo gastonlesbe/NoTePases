@@ -23,4 +23,7 @@
     <string name="ultimos">último</string>
     <string name="favoritas">Favoritos</string>
     <string name="modificanombre">Modifique o Nome</string>
+    <string name="griscal_promo_message">Organize sua família, pets, casa e veículos — tudo em um app. Gratuito.</string>
+    <string name="griscal_promo_cta">Experimentar Griscal</string>
+    <string name="griscal_promo_dismiss">Agora não</string>
 </resources>

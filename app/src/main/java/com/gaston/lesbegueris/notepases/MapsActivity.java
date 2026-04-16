@@ -126,11 +126,81 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
 
     private long UPDATE_INTERVAL = 10 * 1000;  /* 10 secs */
-    private long FASTEST_INTERVAL = 2000; /* 2 sec */
+    private long FASTEST_INTERVAL = 1000; /* 1 sec (used when near) */
+    private long currentUpdateIntervalMs = UPDATE_INTERVAL;
+    private float lastDistanceToDestination = -1f;
+    private static final float NEAR_DISTANCE_M = 100f;
+    private static final float FAR_DISTANCE_M = 2000f;
     private LatLng myLocation;
     private static final String CHANNEL_ID = "tracking_channel";
     private boolean isClosingToMain = false;
     private InterstitialAd interstitialAd;
+
+    private long calculateUpdateInterval(float distanceMeters) {
+        if (distanceMeters > 3000f) {
+            // >3000m: 60 sec
+            return 60000;
+        } else if (distanceMeters >= 2000f) {
+            // 2000m-3000m: 30 sec
+            return 30000;
+        } else if (distanceMeters >= 100f) {
+            // 100m-2000m: 10 sec
+            return 10000;
+        }
+        // <100m: 1 sec
+        return 1000;
+    }
+
+    /**
+     * Reconfigura los updates de ubicación (fused) cuando el intervalo deseado cambia.
+     */
+    private void maybeReconfigureFusedLocationUpdates(float distanceMeters) {
+        if (mLocationRequest == null || mLocationCallback == null) {
+            return;
+        }
+        if (distanceMeters <= 0) {
+            return;
+        }
+
+        long desiredInterval = calculateUpdateInterval(distanceMeters);
+        if (desiredInterval == currentUpdateIntervalMs) {
+            return;
+        }
+
+        Log.d(TAG, "distance=" + distanceMeters + "m => interval=" + desiredInterval + "ms (near<100m => 1s)");
+
+        boolean wasNear = currentUpdateIntervalMs == 1000;
+        boolean nowNear = desiredInterval == 1000;
+        if (!wasNear && !nowNear) {
+            // Cambios entre 30s y 60s: no tan frecuentes
+            if (lastDistanceToDestination > 0 &&
+                    Math.abs(distanceMeters - lastDistanceToDestination) < 150f) {
+                return;
+            }
+        }
+        lastDistanceToDestination = distanceMeters;
+
+        try {
+            getFusedLocationProviderClient(this).removeLocationUpdates(mLocationCallback);
+        } catch (Exception ignored) {
+            // Best-effort: re-request below
+        }
+
+        currentUpdateIntervalMs = desiredInterval;
+        mLocationRequest.setInterval(desiredInterval);
+        mLocationRequest.setFastestInterval(desiredInterval);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
+        builder.addLocationRequest(mLocationRequest);
+        LocationSettingsRequest locationSettingsRequest = builder.build();
+        LocationServices.getSettingsClient(this).checkLocationSettings(locationSettingsRequest);
+
+        getFusedLocationProviderClient(this).requestLocationUpdates(
+                mLocationRequest,
+                mLocationCallback,
+                Looper.myLooper()
+        );
+    }
 
 
     @Override
@@ -783,8 +853,9 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         // Create the location request to start receiving updates
         mLocationRequest = new LocationRequest();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(UPDATE_INTERVAL);
-        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+        currentUpdateIntervalMs = UPDATE_INTERVAL;
+        mLocationRequest.setInterval(currentUpdateIntervalMs);
+        mLocationRequest.setFastestInterval(currentUpdateIntervalMs);
 
         // Create LocationSettingsRequest object using location request
         LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
@@ -797,15 +868,27 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         settingsClient.checkLocationSettings(locationSettingsRequest);
 
         // new Google API SDK v11 uses getFusedLocationProviderClient(this)
-        getFusedLocationProviderClient(this).requestLocationUpdates(mLocationRequest, new LocationCallback() {
-                    @Override
-                    public void onLocationResult(LocationResult locationResult) {
-                        // do work here
-                        onLocationChanged(locationResult.getLastLocation());
-                        distancia();
-                    }
-                },
-                Looper.myLooper());
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                Location last = locationResult.getLastLocation();
+                onLocationChanged(last);
+                distancia();
+                // distancia() actualiza el miembro `distance`
+                if (markerDestino != null && distance > 0) {
+                    maybeReconfigureFusedLocationUpdates(distance);
+                }
+            }
+        };
+
+        getFusedLocationProviderClient(this).requestLocationUpdates(
+                mLocationRequest,
+                mLocationCallback,
+                Looper.myLooper()
+        );
     }
 
     public void starttraking(){
@@ -889,33 +972,27 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     }
 
     public void distancia(){
-
-        Location temp = new Location("");
-        double marcadorLat = markerDestino.getPosition().latitude;
-        double marcadorLon = markerDestino.getPosition().longitude;
-        temp.setLatitude(marcadorLat);
-        temp.setLongitude(marcadorLon);
-
-
-
-        Location yo = new Location("");
-        yo.setLatitude(latitude1);
-        yo.setLongitude(longitude1);
-
-        float[] results = new float[1];
-        Location.distanceBetween( markerDestino.getPosition().latitude,  markerDestino.getPosition().longitude,
-                latitude1, longitude1, results);
-        dist = temp.distanceTo(location);
-        distance = results[0];
-        b = (int) dist;
-
-        if(location == null) {
-            txtBuscar.setText(R.string.recibiendo);
+        if (markerDestino == null || txtBuscar == null) {
+            return;
         }
 
+        if (latitude1 == 0 && longitude1 == 0) {
+            txtBuscar.setText(R.string.recibiendo);
+            return;
+        }
+
+        float[] results = new float[1];
+        Location.distanceBetween(
+                markerDestino.getPosition().latitude,
+                markerDestino.getPosition().longitude,
+                latitude1,
+                longitude1,
+                results
+        );
+
+        distance = results[0];
+        b = (int) distance;
         txtBuscar.setText(b + " Mts");
-
-
     }
 
     private void updateCameraToBounds() {
@@ -965,18 +1042,13 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     @SuppressLint("MissingPermission")
    // @Override
     public void onLocationChanged(Location location) {
-
-        Location mLocation = new Location("");
-        mLocation.setLatitude(latitude1);
-        mLocation.setLongitude(longitude1);
-
-
-        Location mDestination = new Location("");
-        mDestination.setLatitude(latitude2);
-        mDestination.setLongitude(longitude2);
-
-
-        //distancia();
+        if (location == null) {
+            return;
+        }
+        // fused updates -> keep current position updated for `distancia()`
+        latitude1 = location.getLatitude();
+        longitude1 = location.getLongitude();
+        this.location = location;
     }
 
     @Override
