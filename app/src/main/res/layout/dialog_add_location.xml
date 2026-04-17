@@ -4,64 +4,103 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="12dp"
-    android:paddingBottom="20dp"
-    android:paddingStart="20dp"
-    android:paddingEnd="20dp">
+    android:paddingTop="20dp"
+    android:paddingBottom="24dp"
+    android:paddingStart="24dp"
+    android:paddingEnd="24dp"
+    android:background="@color/colorSurface">
+
+    <!-- Title row -->
+    <ImageView
+        android:id="@+id/dialogIcon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:src="@drawable/ic_location_pin"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/titleAddLocation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:fontFamily="@font/poppins_semibold"
         android:text="Agregar Ubicación"
+        android:textColor="@color/colorOnSurface"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="?attr/colorOnSurface"
+        app:layout_constraintBottom_toBottomOf="@id/dialogIcon"
         app:layout_constraintEnd_toStartOf="@id/btnCloseDialog"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@id/dialogIcon"
+        app:layout_constraintTop_toTopOf="@id/dialogIcon" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnCloseDialog"
         style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="-15dp"
-        android:layout_marginEnd="-15dp"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="-8dp"
+        android:layout_marginEnd="-8dp"
         android:contentDescription="@string/close"
         android:text="✕"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="16sp"
+        app:backgroundTint="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Subtitle -->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/txtAddLocationMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
+        android:fontFamily="@font/poppins_regular"
         android:text="¿Cómo deseas agregar la ubicación?"
-        android:textColor="?attr/colorOnSurface"
+        android:textColor="@color/colorTextSecondary"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/titleAddLocation"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/dialogIcon" />
 
+    <!-- Map button (primary) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnSelectOnMap"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_medium"
         android:text="Seleccionar en el mapa"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="14sp"
+        app:backgroundTint="@color/colorPrimary"
+        app:cornerRadius="14dp"
+        app:icon="@android:drawable/ic_dialog_map"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconTint="@color/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtAddLocationMessage" />
 
+    <!-- Address button (outlined) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEnterAddress"
+        style="@style/JourneyButton.Outlined"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/poppins_medium"
         android:text="Ingresar dirección"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/colorPrimary"
+        android:textSize="14sp"
+        app:backgroundTint="@android:color/transparent"
+        app:cornerRadius="14dp"
+        app:icon="@android:drawable/ic_menu_edit"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:iconTint="@color/colorSecondary"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/btnSelectOnMap" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

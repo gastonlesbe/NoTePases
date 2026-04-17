@@ -54,4 +54,16 @@
     <string name="griscal_promo_cta">Probar Griscal</string>
     <string name="griscal_promo_dismiss">Ahora no</string>
 
+    <!-- Main menu -->
+    <string name="menu_help">Ayuda</string>
+    <string name="menu_contact">Contacto</string>
+    <string name="menu_griscal">Griscal — Organiza tu familia</string>
+
+    <!-- Contact dialog -->
+    <string name="contact_title">Escribinos</string>
+    <string name="contact_hint">Tu mensaje…</string>
+    <string name="contact_send">Enviar</string>
+    <string name="contact_cancel">Cancelar</string>
+    <string name="contact_empty_error">Escribí un mensaje antes de enviar</string>
+
 </resources>

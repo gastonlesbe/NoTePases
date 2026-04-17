@@ -495,8 +495,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.help) {
-            // User chose the "Settings" item, show the app settings UI...
+        if (id == R.id.menu_help) {
             Intent e = new Intent(MapsActivity.this, TutoActivity.class);
             startActivity(e);
             return true;

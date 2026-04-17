@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
 import androidx.annotation.ColorInt;
 import androidx.appcompat.app.AlertDialog;
@@ -53,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(myToolbar);
         actionBar = getSupportActionBar();
         //actionBar.setDisplayHomeAsUpEnabled(true);
-        myToolbar.inflateMenu(R.menu.menu);
         myToolbar.setTitleTextColor(getResources().getColor(R.color.colorOnPrimary));
         
         // Inicializar Appodeal (mismo método que en Caretemplate)
@@ -207,20 +209,47 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.help) {
-            // User chose the "Settings" item, show the app settings UI...
-            Intent e = new Intent(MainActivity.this, TutoActivity.class);
-            startActivity(e);
+        if (id == R.id.menu_help) {
+            startActivity(new Intent(MainActivity.this, TutoActivity.class));
             finish();
+            return true;
+        }
+        if (id == R.id.menu_contact) {
+            showContactDialog();
+            return true;
+        }
+        if (id == R.id.menu_griscal) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://griscal.app")));
             return true;
         }
         if (id == R.id.units) {
             showUnitsDialog();
             return true;
         }
-        // If we got here, the user's action was not recognized.
-        // Invoke the superclass to handle it.
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showContactDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_contact, null);
+        TextInputEditText edMessage = view.findViewById(R.id.edContactMessage);
+
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(getString(R.string.contact_title))
+                .setView(view)
+                .setPositiveButton(getString(R.string.contact_send), (dialog, which) -> {
+                    String msg = edMessage.getText() != null ? edMessage.getText().toString().trim() : "";
+                    if (TextUtils.isEmpty(msg)) {
+                        Toast.makeText(this, getString(R.string.contact_empty_error), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                    emailIntent.setData(Uri.parse("mailto:lesberweb@gmail.com"));
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "No Te Pases — Consulta");
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, msg);
+                    startActivity(Intent.createChooser(emailIntent, getString(R.string.contact_send)));
+                })
+                .setNegativeButton(getString(R.string.contact_cancel), null)
+                .show();
     }
 
     private void showUnitsDialog() {

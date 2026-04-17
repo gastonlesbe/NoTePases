@@ -1,8 +1,6 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <!-- Material theme colors -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryVariant</item>
         <item name="colorSecondary">@color/colorSecondary</item>
@@ -12,12 +10,41 @@
         <item name="colorSurface">@color/colorSurface</item>
         <item name="colorOnSurface">@color/colorOnSurface</item>
         <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="fontFamily">@font/poppins</item>
 
         <!-- System UI -->
-        <item name="android:statusBarColor">@color/colorSurface</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:navigationBarColor">@color/colorSurface</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightStatusBar">false</item>
+
+        <!-- Material overrides -->
+        <item name="materialButtonStyle">@style/JourneyButton</item>
+        <item name="textInputStyle">@style/JourneyTextInput</item>
+    </style>
+
+    <style name="JourneyButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="cornerRadius">12dp</item>
+    </style>
+
+    <style name="JourneyButton.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="strokeColor">@color/colorSecondary</item>
+        <item name="strokeWidth">1.5dp</item>
+    </style>
+
+    <style name="JourneyTextInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/colorSecondary</item>
+        <item name="hintTextColor">@color/colorSecondary</item>
+        <item name="boxCornerRadiusTopStart">10dp</item>
+        <item name="boxCornerRadiusTopEnd">10dp</item>
+        <item name="boxCornerRadiusBottomStart">10dp</item>
+        <item name="boxCornerRadiusBottomEnd">10dp</item>
     </style>
 
     <style name="TabWidgetTheme" parent="ThemeOverlay.MaterialComponents">
@@ -25,6 +52,26 @@
         <item name="android:textColorSecondary">@color/colorSecondary</item>
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorOnPrimary">@color/colorOnPrimary</item>
+        <item name="android:fontFamily">@font/poppins</item>
+    </style>
+
+    <style name="AlarmTheme" parent="AppTheme">
+        <item name="android:statusBarColor">@color/colorAlarmBg1</item>
+        <item name="android:navigationBarColor">@color/colorAlarmBg1</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
+
+    <style name="TitleTextAppearance" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:fontFamily">@font/poppins_semibold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:textSize">13sp</item>
+        <item name="textAllCaps">false</item>
     </style>
 
 </resources>

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="2dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="3dp"
+        app:cardBackgroundColor="@color/colorSurface"
         app:cardUseCompatPadding="true">
 
         <LinearLayout
@@ -19,50 +21,63 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:padding="16dp"
-            tools:ignore="MissingConstraints">
+            android:orientation="horizontal">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDelete"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:contentDescription="@string/delete"
-                android:minWidth="40dp"
-                android:minHeight="40dp"
-                android:padding="6dp"
-                android:text=""
-                app:backgroundTint="@android:color/transparent"
-                app:icon="@android:drawable/ic_menu_delete"
-                app:iconPadding="0dp"
-                app:iconSize="40dp"
-                app:iconTint="@color/favoriteRed" />
+            <!-- Teal left accent stripe -->
+            <View
+                android:layout_width="4dp"
+                android:layout_height="match_parent"
+                android:background="@color/colorSecondary"
+                android:minHeight="56dp" />
 
+            <!-- Location pin icon -->
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="14dp"
+                android:src="@drawable/ic_location_pin"
+                android:contentDescription="@string/app_name" />
+
+            <!-- Address text -->
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtDireccion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="monospace"
-                android:gravity="center_vertical"
-                android:text="TextView"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="14sp" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/textView14"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:fontFamily="monospace"
-                android:gravity="center_vertical|end"
-                android:text=">"
-                android:textColor="?attr/colorOnSurface"
-                android:textSize="18sp" />
+                android:layout_marginEnd="4dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginBottom="14dp"
+                android:fontFamily="@font/poppins_regular"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorOnSurface"
+                android:textSize="13sp" />
+
+            <!-- Delete button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDelete"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="4dp"
+                android:contentDescription="@string/delete"
+                android:padding="6dp"
+                android:text=""
+                app:backgroundTint="@android:color/transparent"
+                app:icon="@android:drawable/ic_menu_delete"
+                app:iconPadding="0dp"
+                app:iconSize="22dp"
+                app:iconTint="@color/favoriteRed" />
+
+            <!-- Chevron -->
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="12dp"
+                android:src="@drawable/ic_chevron_right"
+                android:contentDescription="@string/app_name" />
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

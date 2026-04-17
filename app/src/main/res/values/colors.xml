@@ -1,19 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#1E88E5</color>
-    <color name="colorPrimaryDark">#1565C0</color>
-    <color name="colorAccent">#FFB300</color>
-    <color name="colorPrimaryVariant">#1565C0</color>
-    <color name="colorSecondary">#FFB300</color>
-    <color name="colorSecondaryVariant">#FF8F00</color>
+    <!-- Journey Design System — Primary: Deep Midnight Navy -->
+    <color name="colorPrimary">#1A1F3A</color>
+    <color name="colorPrimaryDark">#0F1225</color>
+    <color name="colorPrimaryVariant">#252B4A</color>
+
+    <!-- Secondary: Vibrant Teal -->
+    <color name="colorSecondary">#00D4AA</color>
+    <color name="colorSecondaryVariant">#00A884</color>
+    <color name="colorAccent">#00D4AA</color>
+
+    <!-- On colors -->
     <color name="colorOnPrimary">#FFFFFF</color>
-    <color name="colorOnSecondary">#1B1B1B</color>
+    <color name="colorOnSecondary">#FFFFFF</color>
+    <color name="colorOnSurface">#1A1F3A</color>
+    <color name="colorOnBackground">#1A1F3A</color>
+
+    <!-- Surface & Background -->
     <color name="colorSurface">#FFFFFF</color>
-    <color name="colorOnSurface">#1B1B1B</color>
-    <color name="colorBackground">#F7F7F7</color>
-    <color name="colorOnBackground">#1B1B1B</color>
-    <color name="favoriteRed">#F44336</color>
-    <color name="white">#ffffff</color>
+    <color name="colorBackground">#F0F4F8</color>
+
+    <!-- Text -->
+    <color name="colorTextSecondary">#6B7280</color>
+
+    <!-- Gold for favorites/stars -->
+    <color name="colorGold">#FFD166</color>
+
+    <!-- Actions -->
+    <color name="favoriteRed">#FF6B6B</color>
+
+    <!-- Alarm screen colors -->
+    <color name="colorAlarmBg1">#0F1225</color>
+    <color name="colorAlarmBg2">#1E2550</color>
+    <color name="colorAlarmRing">#00D4AA</color>
+
+    <!-- Legacy aliases kept for compatibility -->
+    <color name="white">#FFFFFF</color>
     <color name="marfil">#cafbf2</color>
     <color name="wallet_holo_blue_light">#33B5E5</color>
 </resources>

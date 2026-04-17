@@ -1,108 +1,137 @@
 package com.gaston.lesbegueris.notepases;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.app.KeyguardManager;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.LocationManager;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
-import androidx.appcompat.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationServices;
-
-/**
- * Created by gaston on 05/12/17.
- */
+import androidx.appcompat.app.AppCompatActivity;
 
 public class Alarma extends AppCompatActivity {
 
     ImageButton btnAlarma;
     SharedPreferences sharedpreferences;
-    public static final String MyPREFERENCES = "lastLocation" ;
-    protected GoogleApiClient mGoogleApiClient;
+    public static final String MyPREFERENCES = "lastLocation";
+    private MediaPlayer ring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // ── Wake screen and show over lock screen ──────────────────────────
+        // Must be called BEFORE super.onCreate() and setContentView()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true);
+            setTurnScreenOn(true);
+            KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);
+            if (km != null) km.requestDismissKeyguard(this, null);
+        } else {
+            getWindow().addFlags(
+                    WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED |
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON |
+                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON |
+                    WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD
+            );
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alarma);
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-        Uri notification = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
-        final Ringtone r = RingtoneManager.getRingtone(getApplicationContext(), notification);
-        final MediaPlayer ring = MediaPlayer.create(Alarma.this, R.raw.ring);
-        ring.start();
+        // Start alarm sound
+        ring = MediaPlayer.create(this, R.raw.ring);
+        if (ring != null) {
+            ring.setLooping(true);
+            ring.start();
+        }
 
-        final Animation myAnim = AnimationUtils.loadAnimation(this, R.anim.shake);
         btnAlarma = findViewById(R.id.btnAlarma);
-        btnAlarma.setAnimation(myAnim);
-        btnAlarma.startAnimation(myAnim);
 
-        btnAlarma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopTraking();
-                stopLocationUpdates();
+        // Shake animation
+        final Animation shakeAnim = AnimationUtils.loadAnimation(this, R.anim.shake);
+        btnAlarma.startAnimation(shakeAnim);
 
-                btnAlarma = findViewById(R.id.btnAlarma);
-                btnAlarma.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        stopTraking();
-                        ring.stop();
-                        ring.release();
-                    }
-                });
+        // Pulsing sonar rings
+        startRingPulse(findViewById(R.id.ring1), 0);
+        startRingPulse(findViewById(R.id.ring2), 700);
+        startRingPulse(findViewById(R.id.ring3), 1400);
 
+        btnAlarma.setOnClickListener(v -> dismiss());
+    }
 
+    private void dismiss() {
+        if (ring != null) {
+            ring.stop();
+            ring.release();
+            ring = null;
+        }
+        releaseWakeLock();
+        stopTraking();
+    }
+
+    private void releaseWakeLock() {
+        if (Traking.alarmWakeLock != null && Traking.alarmWakeLock.isHeld()) {
+            Traking.alarmWakeLock.release();
+            Traking.alarmWakeLock = null;
+        }
+    }
+
+    private void startRingPulse(View ring, long delay) {
+        if (ring == null) return;
+        ObjectAnimator scaleX = ObjectAnimator.ofFloat(ring, "scaleX", 0.15f, 1.6f);
+        ObjectAnimator scaleY = ObjectAnimator.ofFloat(ring, "scaleY", 0.15f, 1.6f);
+        ObjectAnimator alpha  = ObjectAnimator.ofFloat(ring, "alpha",  0.85f, 0f);
+
+        AnimatorSet set = new AnimatorSet();
+        set.playTogether(scaleX, scaleY, alpha);
+        set.setDuration(2100);
+        set.setStartDelay(delay);
+        set.setInterpolator(new AccelerateDecelerateInterpolator());
+        set.addListener(new AnimatorListenerAdapter() {
+            @Override public void onAnimationEnd(Animator animation) {
+                ring.setScaleX(0.15f);
+                ring.setScaleY(0.15f);
+                set.setStartDelay(0);
+                set.start();
             }
-
-
         });
+        set.start();
     }
-    protected void stopLocationUpdates() {
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(
-                    mGoogleApiClient, (LocationListener) this);
+
+    public void stopTraking() {
+        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        if (nm != null) {
+            nm.cancel(333);
+            nm.cancel(334); // also cancel alarm notification
         }
-
-    }
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if (mGoogleApiClient != null) {
-            mGoogleApiClient.disconnect();
-        }
-    }
-
-    public void stopTraking(){
-
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.cancel(333);
-        Intent intent = new Intent(Alarma.this, MainActivity.class); startActivity(intent);
-        finish();
-        startActivity(intent);
-        Intent j = new Intent(Alarma.this, Traking.class);
-        stopService(j);
-
+        stopService(new Intent(this, Traking.class));
         SharedPreferences.Editor editor = sharedpreferences.edit();
         editor.clear();
         editor.commit();
-        stopLocationUpdates();
-
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (ring != null) {
+            ring.release();
+            ring = null;
+        }
+        releaseWakeLock();
+    }
 }

@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/help"
-        android:icon="@android:drawable/ic_menu_help"
-        android:title="@string/Help"
-        android:visible="true"
-        app:showAsAction ="always"/>
+        android:id="@+id/menu_help"
+        android:title="@string/menu_help"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_contact"
+        android:title="@string/menu_contact"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/menu_griscal"
+        android:title="@string/menu_griscal"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/units"
         android:title="@string/units_title"
-        android:visible="true"
         app:showAsAction="never" />
+
 </menu>
