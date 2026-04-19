@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">No Te Pases</string>
+    <string name="app_name">GPS Alert</string>
     <string name="title_activity_maps">Map</string>
-    <string name="noTePases">¡¡¡¡¡¡No Te Pases!!!!!!</string>
+    <string name="noTePases">¡¡¡ GPS Alert !!!</string>
 
 
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-9841764898906750/1703228093</string>
@@ -55,6 +55,7 @@
     <string name="griscal_promo_dismiss">Ahora no</string>
 
     <!-- Main menu -->
+    <string name="menu_version">Versión 1.20</string>
     <string name="menu_help">Ayuda</string>
     <string name="menu_contact">Contacto</string>
     <string name="menu_griscal">Griscal — Organiza tu familia</string>

@@ -30,7 +30,7 @@
             app:logo="@mipmap/ic_launcher"
             app:logoDescription="@string/app_name"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:title="No Te Pases"
+            app:title="@string/app_name"
             app:titleTextAppearance="@style/TitleTextAppearance"
             app:titleTextColor="@color/colorOnPrimary" />
 

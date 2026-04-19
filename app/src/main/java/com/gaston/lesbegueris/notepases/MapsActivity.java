@@ -62,6 +62,9 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.os.PowerManager;
+import android.provider.Settings;
+
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 import static java.lang.Integer.parseInt;
 
@@ -891,6 +894,56 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     }
 
     public void starttraking(){
+
+        // Android 14+ requires USE_FULL_SCREEN_INTENT to be granted by the user
+        // so the alarm screen can appear over the lock screen
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (nm != null && !nm.canUseFullScreenIntent()) {
+                new androidx.appcompat.app.AlertDialog.Builder(this)
+                        .setTitle("Permiso necesario")
+                        .setMessage("Para que la alarma te despierte con la pantalla apagada necesitamos un permiso especial. Toca «Dar permiso» y actívalo para esta app.")
+                        .setPositiveButton("Dar permiso", (d, w) -> {
+                            Intent s = new Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT);
+                            s.setData(android.net.Uri.parse("package:" + getPackageName()));
+                            startActivity(s);
+                        })
+                        .setNegativeButton("Ahora no", (d, w) ->
+                                Toast.makeText(this,
+                                        "La alarma puede no encender la pantalla si está bloqueada",
+                                        Toast.LENGTH_LONG).show())
+                        .show();
+                return; // wait for user to grant before starting
+            }
+        }
+
+        // Warn about battery restrictions — non-blocking, tracking starts regardless
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        if (pm != null) {
+            View rootView = findViewById(android.R.id.content);
+            if (pm.isPowerSaveMode()) {
+                // Battery saver is ON — GPS and background services are throttled by the OS
+                com.google.android.material.snackbar.Snackbar
+                        .make(rootView,
+                                "⚠ Ahorro de batería activo — puede afectar la precisión del GPS",
+                                com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE)
+                        .setAction("Ajustes", v -> startActivity(
+                                new Intent(Settings.ACTION_BATTERY_SAVER_SETTINGS)))
+                        .show();
+            } else if (!pm.isIgnoringBatteryOptimizations(getPackageName())) {
+                // Battery optimization is ON for this app — service may be killed in background
+                com.google.android.material.snackbar.Snackbar
+                        .make(rootView,
+                                "La app puede cerrarse en segundo plano. Recomendamos desactivar optimización.",
+                                com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
+                        .setAction("Desactivar", v -> {
+                            Intent i = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                            i.setData(android.net.Uri.parse("package:" + getPackageName()));
+                            startActivity(i);
+                        })
+                        .show();
+            }
+        }
 
         if (markerDestino == null) {
             Toast.makeText(this, "Selecciona un destino primero", Toast.LENGTH_SHORT).show();

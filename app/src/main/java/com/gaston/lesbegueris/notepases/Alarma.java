@@ -51,11 +51,14 @@ public class Alarma extends AppCompatActivity {
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
 
-        // Start alarm sound
-        ring = MediaPlayer.create(this, R.raw.ring);
-        if (ring != null) {
-            ring.setLooping(true);
-            ring.start();
+        // Use the sound already started by Traking service if available,
+        // otherwise start our own (covers the case where Alarma opens independently)
+        if (Traking.alarmPlayer == null) {
+            ring = MediaPlayer.create(this, R.raw.ring);
+            if (ring != null) {
+                ring.setLooping(true);
+                ring.start();
+            }
         }
 
         btnAlarma = findViewById(R.id.btnAlarma);
@@ -73,9 +76,10 @@ public class Alarma extends AppCompatActivity {
     }
 
     private void dismiss() {
+        // Stop whichever player is running
+        Traking.stopAlarmSound();
         if (ring != null) {
-            ring.stop();
-            ring.release();
+            try { ring.stop(); ring.release(); } catch (Exception ignored) {}
             ring = null;
         }
         releaseWakeLock();
@@ -128,8 +132,9 @@ public class Alarma extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Traking.stopAlarmSound();
         if (ring != null) {
-            ring.release();
+            try { ring.release(); } catch (Exception ignored) {}
             ring = null;
         }
         releaseWakeLock();

@@ -1,0 +1,22 @@
+{
+  "name": "video",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "preview": "remotion studio src/index.jsx",
+    "render:es": "remotion render src/index.jsx GPSAlertES out/GPSAlert_ES.mp4 --codec=h264",
+    "render:en": "remotion render src/index.jsx GPSAlertEN out/GPSAlert_EN.mp4 --codec=h264",
+    "render:all": "npm run render:es && npm run render:en"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/cli": "4.0.448",
+    "@remotion/player": "4.0.448",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "remotion": "4.0.448"
+  }
+}

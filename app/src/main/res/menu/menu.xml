@@ -22,4 +22,10 @@
         android:title="@string/units_title"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/menu_version"
+        android:title="@string/menu_version"
+        android:enabled="false"
+        app:showAsAction="never" />
+
 </menu>
