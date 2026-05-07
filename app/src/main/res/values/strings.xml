@@ -55,10 +55,13 @@
     <string name="griscal_promo_dismiss">Ahora no</string>
 
     <!-- Main menu -->
-    <string name="menu_version">Versión 1.20</string>
+    <string name="menu_version">v1.20</string>
     <string name="menu_help">Ayuda</string>
     <string name="menu_contact">Contacto</string>
     <string name="menu_griscal">Griscal — Organiza tu familia</string>
+    <string name="menu_our_apps">Nuestras apps</string>
+    <string name="menu_share">Compartir</string>
+    <string name="menu_rate">Calificar la app</string>
 
     <!-- Contact dialog -->
     <string name="contact_title">Escribinos</string>

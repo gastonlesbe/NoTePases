@@ -3,18 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/menu_help"
-        android:title="@string/menu_help"
-        app:showAsAction="never" />
-
-    <item
         android:id="@+id/menu_contact"
         android:title="@string/menu_contact"
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/menu_griscal"
-        android:title="@string/menu_griscal"
+        android:id="@+id/menu_our_apps"
+        android:title="@string/menu_our_apps"
+        app:showAsAction="never">
+        <menu>
+            <item android:id="@+id/app_carepal_pets"          android:title="CarePal: Mascotas y Salud" />
+            <item android:id="@+id/app_carepal_cars"          android:title="CarePal: Autos y Service" />
+            <item android:id="@+id/app_carepal_family"        android:title="CarePal: Familia y Agenda" />
+            <item android:id="@+id/app_carepal_house"         android:title="CarePal: Hogar y Mantenimiento" />
+            <item android:id="@+id/app_griscal"               android:title="Griscal: Hogar y Familia" />
+            <item android:id="@+id/app_milinterna"            android:title="Mi Linterna" />
+            <item android:id="@+id/app_milupa"                android:title="MiLupa" />
+            <item android:id="@+id/app_permission_inspector"  android:title="Permission Inspector" />
+        </menu>
+    </item>
+
+    <item
+        android:id="@+id/menu_help"
+        android:title="@string/menu_help"
         app:showAsAction="never" />
 
     <item
@@ -23,9 +34,19 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/share"
+        android:title="@string/menu_share"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/rate"
+        android:title="@string/menu_rate"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/menu_version"
-        android:title="@string/menu_version"
         android:enabled="false"
+        android:title="v"
         app:showAsAction="never" />
 
 </menu>

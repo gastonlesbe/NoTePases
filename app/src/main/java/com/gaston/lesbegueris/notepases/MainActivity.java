@@ -207,31 +207,66 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
+        MenuItem versionItem = menu.findItem(R.id.menu_version);
+        if (versionItem != null) {
+            try {
+                String v = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
+                versionItem.setTitle("v" + v);
+            } catch (android.content.pm.PackageManager.NameNotFoundException ignored) {}
+            versionItem.setEnabled(false);
+        }
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.menu_help) {
-            startActivity(new Intent(MainActivity.this, TutoActivity.class));
+            startActivity(new Intent(this, TutoActivity.class));
             finish();
             return true;
         }
-        if (id == R.id.menu_contact) {
-            showContactDialog();
-            return true;
-        }
-        if (id == R.id.menu_griscal) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://griscal.app")));
-            return true;
-        }
-        if (id == R.id.units) {
-            showUnitsDialog();
-            return true;
-        }
+        if (id == R.id.menu_contact)          { showContactDialog(); return true; }
+        if (id == R.id.units)                 { showUnitsDialog(); return true; }
+        if (id == R.id.share)                 { shareApp(); return true; }
+        if (id == R.id.rate)                  { rateApp(); return true; }
+        if (id == R.id.app_carepal_pets)      { openPlayStore("com.gastonlesbegueris.caretemplate.pets"); return true; }
+        if (id == R.id.app_carepal_cars)      { openPlayStore("com.gastonlesbegueris.caretemplate.cars"); return true; }
+        if (id == R.id.app_carepal_family)    { openPlayStore("com.gastonlesbegueris.caretemplate.family"); return true; }
+        if (id == R.id.app_carepal_house)     { openPlayStore("com.gastonlesbegueris.caretemplate.house"); return true; }
+        if (id == R.id.app_griscal)           { openPlayStore("app.griscal.notif"); return true; }
+        if (id == R.id.app_milinterna)        { openPlayStore("lesbegueris.gaston.com.milinterna"); return true; }
+        if (id == R.id.app_milupa)            { openPlayStore("lesbegueris.gaston.com.milupa"); return true; }
+        if (id == R.id.app_permission_inspector) { openPlayStore("com.griscal.permissioninspector"); return true; }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void openPlayStore(String packageName) {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + packageName)));
+        } catch (android.content.ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=" + packageName)));
+        }
+    }
+
+    private void shareApp() {
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("text/plain");
+        share.putExtra(Intent.EXTRA_TEXT,
+                "https://play.google.com/store/apps/details?id=com.gaston.lesbegueris.notepases");
+        startActivity(Intent.createChooser(share, getString(R.string.menu_share)));
+    }
+
+    private void rateApp() {
+        try {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=com.gaston.lesbegueris.notepases")));
+        } catch (android.content.ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=com.gaston.lesbegueris.notepases")));
+        }
     }
 
     private void showContactDialog() {

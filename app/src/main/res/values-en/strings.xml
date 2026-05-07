@@ -17,7 +17,10 @@
     <string name="recibiendo">Receibing Location ....</string>
     <string name="falta">At :</string>
     <string name="app_name">GPS Alert</string>
-    <string name="menu_version">Version 1.20</string>
+    <string name="menu_version">v1.20</string>
+    <string name="menu_our_apps">Our apps</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_rate">Rate this app</string>
     <string name="distancia">Distance:</string>
     <string name="alerta">meters to Alert</string>
     <string name="nombre">Name</string>

@@ -2,7 +2,10 @@
 <resources>
     <string name="title_activity_maps">Map</string>
     <string name="app_name">GPS Alert</string>
-    <string name="menu_version">Versão 1.20</string>
+    <string name="menu_version">v1.20</string>
+    <string name="menu_our_apps">Nossos apps</string>
+    <string name="menu_share">Compartilhar</string>
+    <string name="menu_rate">Avaliar o app</string>
     <string name="noTePases">¡¡¡¡¡¡Você Chegou!!!!!!</string>
     <string name="agregaDireccion">Procure Uma Direção</string>
     <string name="escribeDireccion">Escreva o Endereço</string>
