@@ -20,8 +20,8 @@ android {
         applicationId "com.gaston.lesbegueris.notepases"
         minSdkVersion 23
         targetSdkVersion 35
-        versionCode 20
-        versionName '1.20'
+        versionCode 21
+        versionName '1.21'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         // Enabling multidex support.
         multiDexEnabled true
@@ -89,7 +89,7 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:21.3.0'
     implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'com.google.android.material:material:1.13.0'
-    implementation 'com.google.android.gms:play-services-ads:24.9.0'
+    implementation 'com.google.android.gms:play-services-ads:25.2.0'
     implementation 'androidx.viewpager2:viewpager2:1.1.0'
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.firebase:firebase-core:21.1.1'
