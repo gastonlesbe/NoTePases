@@ -162,6 +162,25 @@
                     android:textSize="14sp" />
             </LinearLayout>
 
+            <!-- Divider -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="40dp"
+                android:background="#E0E0E0"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp" />
+
+            <!-- Overflow menu button -->
+            <ImageButton
+                android:id="@+id/btnMapMenu"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="@string/app_name"
+                android:padding="4dp"
+                android:src="@drawable/ic_more_vert"
+                android:tint="@color/colorPrimary" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

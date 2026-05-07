@@ -37,6 +37,9 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.gaston.lesbegueris.notepases.util.DistanceFormatter;
 import com.gaston.lesbegueris.notepases.util.AppodealHelper;
+import com.google.android.play.core.review.ReviewInfo;
+import com.google.android.play.core.review.ReviewManager;
+import com.google.android.play.core.review.ReviewManagerFactory;
 import androidx.viewpager2.widget.ViewPager2;
 
 public class MainActivity extends AppCompatActivity {
@@ -60,6 +63,8 @@ public class MainActivity extends AppCompatActivity {
         
         // Inicializar Appodeal (mismo método que en Caretemplate)
         initAppodeal();
+
+        checkAndRequestReview();
 
 
 
@@ -321,6 +326,24 @@ public class MainActivity extends AppCompatActivity {
             dialog.dismiss();
         });
         new android.os.Handler().postDelayed(dialog::show, 1500);
+    }
+
+    private void checkAndRequestReview() {
+        android.content.SharedPreferences prefs = getSharedPreferences("app_meta", MODE_PRIVATE);
+        int runs = prefs.getInt("run_count", 0) + 1;
+        prefs.edit().putInt("run_count", runs).apply();
+
+        // Ask on run 10, then every 30 runs so returning users get reminded
+        if (runs == 10 || (runs > 10 && runs % 30 == 0)) {
+            ReviewManager manager = ReviewManagerFactory.create(this);
+            manager.requestReviewFlow().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    ReviewInfo reviewInfo = task.getResult();
+                    manager.launchReviewFlow(this, reviewInfo);
+                }
+                // If it fails we just skip silently — never block the user
+            });
+        }
     }
 }
 

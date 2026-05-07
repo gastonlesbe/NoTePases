@@ -65,6 +65,12 @@ import java.util.TimerTask;
 import android.os.PowerManager;
 import android.provider.Settings;
 
+import android.net.Uri;
+import android.text.TextUtils;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.textfield.TextInputEditText;
+import com.gaston.lesbegueris.notepases.util.DistanceFormatter;
+
 import static com.google.android.gms.location.LocationServices.getFusedLocationProviderClient;
 import static java.lang.Integer.parseInt;
 
@@ -280,6 +286,34 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             public void onClick(View v) {
                 cerrar();
             }
+        });
+
+        // Overflow menu on the map top card
+        android.widget.ImageButton btnMapMenu = findViewById(R.id.btnMapMenu);
+        btnMapMenu.setOnClickListener(v -> {
+            android.widget.PopupMenu popup = new android.widget.PopupMenu(this, v);
+            popup.getMenuInflater().inflate(R.menu.menu, popup.getMenu());
+            popup.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+                if (id == R.id.menu_help) {
+                    startActivity(new Intent(this, TutoActivity.class));
+                    return true;
+                }
+                if (id == R.id.menu_contact) {
+                    showContactDialog();
+                    return true;
+                }
+                if (id == R.id.menu_griscal) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://griscal.app")));
+                    return true;
+                }
+                if (id == R.id.units) {
+                    showUnitsDialog();
+                    return true;
+                }
+                return false;
+            });
+            popup.show();
         });
 
 
@@ -1204,5 +1238,49 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
     @Override
     public void onClick(View v) {
 
+    }
+
+    private void showContactDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_contact, null);
+        TextInputEditText edMessage = view.findViewById(R.id.edContactMessage);
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(getString(R.string.contact_title))
+                .setView(view)
+                .setPositiveButton(getString(R.string.contact_send), (dialog, which) -> {
+                    String msg = edMessage.getText() != null ? edMessage.getText().toString().trim() : "";
+                    if (TextUtils.isEmpty(msg)) {
+                        Toast.makeText(this, getString(R.string.contact_empty_error), Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+                    emailIntent.setData(Uri.parse("mailto:lesberweb@gmail.com"));
+                    emailIntent.putExtra(Intent.EXTRA_SUBJECT, "GPS Alert — Consulta");
+                    emailIntent.putExtra(Intent.EXTRA_TEXT, msg);
+                    startActivity(Intent.createChooser(emailIntent, getString(R.string.contact_send)));
+                })
+                .setNegativeButton(getString(R.string.contact_cancel), null)
+                .show();
+    }
+
+    private void showUnitsDialog() {
+        final String[] values = {"system", "metric", "imperial"};
+        final String[] labels = {
+                getString(R.string.units_system),
+                getString(R.string.units_metric),
+                getString(R.string.units_imperial)
+        };
+        String current = DistanceFormatter.getUnitsPreference(this);
+        int checked = 0;
+        for (int i = 0; i < values.length; i++) {
+            if (values[i].equals(current)) { checked = i; break; }
+        }
+        final int[] selected = {checked};
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(getString(R.string.units_title))
+                .setSingleChoiceItems(labels, checked, (dialog, which) -> selected[0] = which)
+                .setPositiveButton(android.R.string.ok, (dialog, which) ->
+                        DistanceFormatter.setUnitsPreference(this, values[selected[0]]))
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
     }
 }
