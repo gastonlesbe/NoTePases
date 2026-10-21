@@ -10,3 +10,11 @@
 keystore.properties
 *.jks
 !keystore.properties.example
+
+# Signed builds, recordings, heap dumps
+*.aab
+*.apk
+app/release/
+videos/
+Videos/
+*.hprof

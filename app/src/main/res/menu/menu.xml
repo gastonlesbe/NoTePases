@@ -29,6 +29,11 @@
         app:showAsAction="never" />
 
     <item
+        android:id="@+id/menu_theme"
+        android:title="@string/menu_theme"
+        app:showAsAction="never" />
+
+    <item
         android:id="@+id/units"
         android:title="@string/units_title"
         app:showAsAction="never" />

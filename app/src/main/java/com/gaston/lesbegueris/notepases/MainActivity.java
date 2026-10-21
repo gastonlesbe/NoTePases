@@ -227,6 +227,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return true;
         }
+        if (id == R.id.menu_theme)             { com.gaston.lesbegueris.notepases.util.ThemeHelper.showThemeDialog(this); return true; }
         if (id == R.id.menu_contact)          { showContactDialog(); return true; }
         if (id == R.id.units)                 { showUnitsDialog(); return true; }
         if (id == R.id.share)                 { shareApp(); return true; }

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark mode — uses the app icon palette for backgrounds/surfaces -->
+    <color name="colorBackground">#0c2038</color>
+    <color name="colorSurface">#0b1d33</color>
+    <color name="colorOnBackground">#FFFFFF</color>
+    <color name="colorOnSurface">#FFFFFF</color>
+    <color name="colorTextSecondary">#9DB1C7</color>
+</resources>

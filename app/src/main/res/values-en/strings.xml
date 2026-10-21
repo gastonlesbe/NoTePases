@@ -21,6 +21,11 @@
     <string name="menu_our_apps">Our apps</string>
     <string name="menu_share">Share</string>
     <string name="menu_rate">Rate this app</string>
+    <string name="menu_theme">Appearance</string>
+    <string name="theme_choose">Choose appearance</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system">Follow system</string>
     <string name="distancia">Distance:</string>
     <string name="alerta">meters to Alert</string>
     <string name="nombre">Name</string>

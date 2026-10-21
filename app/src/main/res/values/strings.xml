@@ -62,6 +62,11 @@
     <string name="menu_our_apps">Nuestras apps</string>
     <string name="menu_share">Compartir</string>
     <string name="menu_rate">Calificar la app</string>
+    <string name="menu_theme">Apariencia</string>
+    <string name="theme_choose">Elegir apariencia</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Oscuro</string>
+    <string name="theme_system">Seguir sistema</string>
 
     <!-- Contact dialog -->
     <string name="contact_title">Escribinos</string>

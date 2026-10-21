@@ -6,6 +6,11 @@
     <string name="menu_our_apps">Nossos apps</string>
     <string name="menu_share">Compartilhar</string>
     <string name="menu_rate">Avaliar o app</string>
+    <string name="menu_theme">Aparência</string>
+    <string name="theme_choose">Escolher aparência</string>
+    <string name="theme_light">Claro</string>
+    <string name="theme_dark">Escuro</string>
+    <string name="theme_system">Seguir sistema</string>
     <string name="noTePases">¡¡¡¡¡¡Você Chegou!!!!!!</string>
     <string name="agregaDireccion">Procure Uma Direção</string>
     <string name="escribeDireccion">Escreva o Endereço</string>
