@@ -1,5 +1,16 @@
 apply plugin: 'com.android.application'
 
+// Firma: las claves van en .env (no versionado) o en variables de entorno
+def signingEnv = [:]
+def signingEnvFile = rootProject.file(".env")
+if (signingEnvFile.exists()) {
+    signingEnvFile.eachLine { line ->
+        def m = line =~ /^\s*([A-Z_]+)\s*=\s*(.*?)\s*$/
+        if (m.matches()) signingEnv[m.group(1)] = m.group(2)
+    }
+}
+def signingValue = { String key -> signingEnv[key] ?: System.getenv(key) }
+
 // Deshabilitar verificación de AAR metadata (advertencias normales con Appodeal)
 tasks.whenTaskAdded { task ->
     if (task.name.contains("checkDebugAarMetadata") || task.name.contains("checkReleaseAarMetadata")) {
@@ -28,25 +39,11 @@ android {
     }
     signingConfigs {
         release {
-            def keystorePropertiesFile = rootProject.file("keystore.properties")
-            def keystoreProperties = new Properties()
-            if (keystorePropertiesFile.exists()) {
-                keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
-                def storeFilePath = keystoreProperties['storeFile']
-                if (storeFilePath.startsWith('app/')) {
-                    storeFile file(storeFilePath.substring(4)) // Remove 'app/' prefix since we're in app/build.gradle
-                } else {
-                    storeFile file(storeFilePath)
-                }
-                storePassword keystoreProperties['storePassword']
-                keyAlias keystoreProperties['keyAlias']
-                keyPassword keystoreProperties['keyPassword']
-            } else {
-                // Fallback: usar el keystore en app/key.jks (necesitarás proporcionar las contraseñas)
-                storeFile file('key.jks')
-                storePassword System.getenv("KEYSTORE_PASSWORD") ?: ""
-                keyAlias System.getenv("KEY_ALIAS") ?: "key"
-                keyPassword System.getenv("KEY_PASSWORD") ?: ""
+            if (signingValue('KEYSTORE_FILE')) {
+                storeFile file(signingValue('KEYSTORE_FILE'))
+                storePassword signingValue('KEYSTORE_PASSWORD')
+                keyAlias signingValue('KEY_ALIAS')
+                keyPassword signingValue('KEY_PASSWORD')
             }
         }
     }
