@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import androidx.core.os.ConfigurationCompat;
+
 import com.gaston.lesbegueris.notepases.R;
 
 import java.util.Locale;
@@ -35,7 +37,8 @@ public final class DistanceFormatter {
         if (UNITS_IMPERIAL.equals(pref)) {
             return true;
         }
-        Locale locale = context.getResources().getConfiguration().getLocales().get(0);
+        // ConfigurationCompat: Configuration.getLocales() is API 24+ and minSdk is 23.
+        Locale locale = ConfigurationCompat.getLocales(context.getResources().getConfiguration()).get(0);
         String country = locale.getCountry();
         return "US".equalsIgnoreCase(country)
                 || "LR".equalsIgnoreCase(country)

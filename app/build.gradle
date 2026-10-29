@@ -73,8 +73,10 @@ android {
         }
     }
     lint {
-        abortOnError false
-        checkReleaseBuilds false
+        // Existing issues live in lint-baseline.xml; anything new fails the build.
+        abortOnError true
+        checkReleaseBuilds true
+        baseline = file('lint-baseline.xml')
     }
 }
 

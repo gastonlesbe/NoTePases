@@ -1,0 +1,2016 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="6" by="lint 9.2.1" type="baseline" client="gradle" dependencies="false" name="AGP (9.2.1)" variant="all" version="9.2.1">
+
+    <issue
+        id="MissingPermission"
+        message="Call requires permission which may be rejected by user: code should explicitly check to see if permission is available (with `checkPermission`) or explicitly handle a potential `SecurityException`"
+        errorLine1="        getFusedLocationProviderClient(this).requestLocationUpdates("
+        errorLine2="        ^">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="207"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="MissingPermission"
+        message="Call requires permission which may be rejected by user: code should explicitly check to see if permission is available (with `checkPermission`) or explicitly handle a potential `SecurityException`"
+        errorLine1="        mFusedLocationProviderClient.getLastLocation()"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity2.java"
+            line="126"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="MissingSuperCall"
+        message="Overriding method should call `super.onRequestPermissionsResult`"
+        errorLine1="    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="790"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="ApplySharedPref"
+        message="Consider using `apply()` instead; `commit` writes its data to persistent storage immediately, whereas `apply` will handle it in the background"
+        errorLine1="        editor.commit();"
+        errorLine2="               ~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/Alarma.java"
+            line="127"
+            column="16"/>
+    </issue>
+
+    <issue
+        id="ApplySharedPref"
+        message="Consider using `apply()` instead; `commit` writes its data to persistent storage immediately, whereas `apply` will handle it in the background"
+        errorLine1="        editor.commit();"
+        errorLine2="               ~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="1128"
+            column="16"/>
+    </issue>
+
+    <issue
+        id="MissingConstraints"
+        message="This view is not constrained vertically: at runtime it will jump to the top unless you add a vertical constraint"
+        errorLine1="    &lt;com.google.android.material.card.MaterialCardView"
+        errorLine2="     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/lista_direcciones.xml"
+            line="7"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="MissingConstraints"
+        message="This view is not constrained vertically: at runtime it will jump to the top unless you add a vertical constraint"
+        errorLine1="    &lt;com.google.android.material.card.MaterialCardView"
+        errorLine2="     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/lista_favoritos.xml"
+            line="7"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="OldTargetApi"
+        message="Not targeting the latest versions of Android; compatibility modes apply. Consider testing and updating this version. Consult the `android.os.Build.VERSION_CODES` javadoc for details."
+        errorLine1="        targetSdkVersion 36"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="33"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `showWhenLocked` is only used in API level 27 and higher (current min is 23)"
+        errorLine1="            android:showWhenLocked=&quot;true&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="76"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `turnScreenOn` is only used in API level 27 and higher (current min is 23)"
+        errorLine1="            android:turnScreenOn=&quot;true&quot;>&lt;/activity>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/AndroidManifest.xml"
+            line="77"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `font` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:font=&quot;@font/poppins_regular&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="5"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `fontStyle` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:fontStyle=&quot;normal&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="6"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `fontWeight` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:fontWeight=&quot;400&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="7"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `font` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:font=&quot;@font/poppins_medium&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="12"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `fontStyle` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:fontStyle=&quot;normal&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="13"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `fontWeight` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:fontWeight=&quot;500&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="14"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `font` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:font=&quot;@font/poppins_semibold&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="19"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `fontStyle` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:fontStyle=&quot;normal&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="20"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `fontWeight` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:fontWeight=&quot;600&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="21"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `font` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:font=&quot;@font/poppins_bold&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="26"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `fontStyle` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:fontStyle=&quot;normal&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="27"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="UnusedAttribute"
+        message="Attribute `fontWeight` is only used in API level 26 and higher (current min is 23)"
+        errorLine1="        android:fontWeight=&quot;700&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/font/poppins.xml"
+            line="28"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="BatteryLife"
+        message="Use of `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS` violates the Play Store Content Policy regarding acceptable use cases, as described in https://developer.android.com/training/monitoring-device-state/doze-standby.html"
+        errorLine1="                            Intent i = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);"
+        errorLine2="                                                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="980"
+            column="60"/>
+    </issue>
+
+    <issue
+        id="FragmentTagUsage"
+        message="Replace the &lt;fragment> tag with FragmentContainerView."
+        errorLine1="    &lt;fragment"
+        errorLine2="     ~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_mapa.xml"
+            line="11"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="FragmentTagUsage"
+        message="Replace the &lt;fragment> tag with FragmentContainerView."
+        errorLine1="    &lt;fragment"
+        errorLine2="     ~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_maps.xml"
+            line="9"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="AndroidGradlePluginVersion"
+        message="A newer version of Gradle than 9.4.1 is available: 9.8.2"
+        errorLine1="distributionUrl=https\://services.gradle.org/distributions/gradle-9.4.1-bin.zip"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="$HOME/StudioProjects/NoTePases/gradle/wrapper/gradle-wrapper.properties"
+            line="4"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of `compileSdk` than 36 is available: 37"
+        errorLine1="    compileSdk 36"
+        errorLine2="    ~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="23"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.constraintlayout:constraintlayout than 2.2.1 is available: 2.2.2"
+        errorLine1="    implementation &apos;androidx.constraintlayout:constraintlayout:2.2.1&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="85"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.gms:play-services-maps than 20.0.0 is available: 20.1.0"
+        errorLine1="    implementation &apos;com.google.android.gms:play-services-maps:20.0.0&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="86"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.firebase:firebase-messaging than 25.0.1 is available: 26.0.1"
+        errorLine1="    implementation &apos;com.google.firebase:firebase-messaging:25.0.1&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="87"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.gms:play-services-location than 21.3.0 is available: 21.4.0"
+        errorLine1="    implementation &apos;com.google.android.gms:play-services-location:21.3.0&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="88"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of androidx.appcompat:appcompat than 1.7.1 is available: 1.8.0"
+        errorLine1="    implementation &apos;androidx.appcompat:appcompat:1.7.1&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="89"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.material:material than 1.13.0 is available: 1.14.0"
+        errorLine1="    implementation &apos;com.google.android.material:material:1.13.0&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="90"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="GradleDependency"
+        message="A newer version of com.google.android.gms:play-services-ads than 25.2.0 is available: 25.5.0"
+        errorLine1="    implementation &apos;com.google.android.gms:play-services-ads:25.2.0&apos;"
+        errorLine2="                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="build.gradle"
+            line="91"
+            column="20"/>
+    </issue>
+
+    <issue
+        id="UseAppTint"
+        message="Must use `app:tint` instead of `android:tint`"
+        errorLine1="                android:tint=&quot;@color/colorPrimary&quot; />"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_mapa.xml"
+            line="182"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;close&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;close&quot;>Cerrar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="29"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;current_distance&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;current_distance&quot;>Distancia actual&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="30"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;alerta_label&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;alerta_label&quot;>Alerta&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="31"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;meters_short&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;meters_short&quot;>mts&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="32"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;kilometers_short&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;kilometers_short&quot;>km&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="33"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;miles_short&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;miles_short&quot;>mi&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="34"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;detener&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;detener&quot;>Detener&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="35"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;units_title&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;units_title&quot;>Unidad de medida&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="36"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;units_system&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;units_system&quot;>Automático (sistema)&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="37"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;units_metric&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;units_metric&quot;>Metros / Kilómetros&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="38"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;units_imperial&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;units_imperial&quot;>Millas&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="39"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;delete&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;delete&quot;>Eliminar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="40"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;delete_address_title&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;delete_address_title&quot;>Eliminar dirección&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="41"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;delete_address_message&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;delete_address_message&quot;>Este cambio no se puede deshacer. ¿Querés borrar la dirección?&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="42"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;delete_confirm&quot; is not translated in &quot;pt&quot; (Portuguese)"
+        errorLine1="    &lt;string name=&quot;delete_confirm&quot;>Borrar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="43"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;appodeal_app_key&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;appodeal_app_key&quot;>71d3e7b55bfb2243b36add91bcfa88dec0c86253c9a6d983&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="46"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;admob_app_id&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;admob_app_id&quot;>ca-app-pub-9841764898906750~1231798265&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="50"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;menu_help&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;menu_help&quot;>Ayuda&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="59"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;menu_contact&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;menu_contact&quot;>Contacto&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="60"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;menu_griscal&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;menu_griscal&quot;>Griscal — Organiza tu familia&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="61"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;contact_title&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;contact_title&quot;>Escribinos&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="72"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;contact_hint&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;contact_hint&quot;>Tu mensaje…&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="73"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;contact_send&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;contact_send&quot;>Enviar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="74"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;contact_cancel&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;contact_cancel&quot;>Cancelar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="75"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MissingTranslation"
+        message="&quot;contact_empty_error&quot; is not translated in &quot;pt&quot; (Portuguese) or &quot;en&quot; (English)"
+        errorLine1="    &lt;string name=&quot;contact_empty_error&quot;>Escribí un mensaje antes de enviar&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="76"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnsafeImplicitIntentLaunch"
+        message="The intent action `android.intent.action.VIEW (used to start an activity)` matches the intent filter of a non-exported component `com.amazon.device.ads.DTBAdActivity` from a manifest. If you are trying to invoke this specific component via the action then you should make the intent explicit by calling `Intent.set{Component,Class,ClassName}`."
+        errorLine1="            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(&quot;market://details?id=&quot; + packageName)));"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MainActivity.java"
+            line="248"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="UnsafeImplicitIntentLaunch"
+        message="The intent action `android.intent.action.VIEW (used to start an activity)` matches the intent filter of a non-exported component `com.amazon.device.ads.DTBAdActivity` from a manifest. If you are trying to invoke this specific component via the action then you should make the intent explicit by calling `Intent.set{Component,Class,ClassName}`."
+        errorLine1="            startActivity(new Intent(Intent.ACTION_VIEW,"
+        errorLine2="                          ^">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MainActivity.java"
+            line="250"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="UnsafeImplicitIntentLaunch"
+        message="The intent action `android.intent.action.VIEW (used to start an activity)` matches the intent filter of a non-exported component `com.amazon.device.ads.DTBAdActivity` from a manifest. If you are trying to invoke this specific component via the action then you should make the intent explicit by calling `Intent.set{Component,Class,ClassName}`."
+        errorLine1="            startActivity(new Intent(Intent.ACTION_VIEW,"
+        errorLine2="                          ^">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MainActivity.java"
+            line="265"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="UnsafeImplicitIntentLaunch"
+        message="The intent action `android.intent.action.VIEW (used to start an activity)` matches the intent filter of a non-exported component `com.amazon.device.ads.DTBAdActivity` from a manifest. If you are trying to invoke this specific component via the action then you should make the intent explicit by calling `Intent.set{Component,Class,ClassName}`."
+        errorLine1="            startActivity(new Intent(Intent.ACTION_VIEW,"
+        errorLine2="                          ^">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MainActivity.java"
+            line="268"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="UnsafeImplicitIntentLaunch"
+        message="The intent action `android.intent.action.VIEW (used to start an activity)` matches the intent filter of a non-exported component `com.amazon.device.ads.DTBAdActivity` from a manifest. If you are trying to invoke this specific component via the action then you should make the intent explicit by calling `Intent.set{Component,Class,ClassName}`."
+        errorLine1="            startActivity(new android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(&quot;https://griscal.app&quot;)));"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MainActivity.java"
+            line="357"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="UnsafeImplicitIntentLaunch"
+        message="The intent action `android.intent.action.VIEW (used to start an activity)` matches the intent filter of a non-exported component `com.amazon.device.ads.DTBAdActivity` from a manifest. If you are trying to invoke this specific component via the action then you should make the intent explicit by calling `Intent.set{Component,Class,ClassName}`."
+        errorLine1="            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(&quot;market://details?id=&quot; + packageName)));"
+        errorLine2="                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="1251"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="UnsafeImplicitIntentLaunch"
+        message="The intent action `android.intent.action.VIEW (used to start an activity)` matches the intent filter of a non-exported component `com.amazon.device.ads.DTBAdActivity` from a manifest. If you are trying to invoke this specific component via the action then you should make the intent explicit by calling `Intent.set{Component,Class,ClassName}`."
+        errorLine1="            startActivity(new Intent(Intent.ACTION_VIEW,"
+        errorLine2="                          ^">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="1253"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="UnsafeImplicitIntentLaunch"
+        message="The intent action `android.intent.action.VIEW (used to start an activity)` matches the intent filter of a non-exported component `com.amazon.device.ads.DTBAdActivity` from a manifest. If you are trying to invoke this specific component via the action then you should make the intent explicit by calling `Intent.set{Component,Class,ClassName}`."
+        errorLine1="            startActivity(new Intent(Intent.ACTION_VIEW,"
+        errorLine2="                          ^">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="1268"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="UnsafeImplicitIntentLaunch"
+        message="The intent action `android.intent.action.VIEW (used to start an activity)` matches the intent filter of a non-exported component `com.amazon.device.ads.DTBAdActivity` from a manifest. If you are trying to invoke this specific component via the action then you should make the intent explicit by calling `Intent.set{Component,Class,ClassName}`."
+        errorLine1="            startActivity(new Intent(Intent.ACTION_VIEW,"
+        errorLine2="                          ^">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="1271"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="ObsoleteLayoutParam"
+        message="Invalid layout param in a `LinearLayout`: `layout_below`"
+        errorLine1="            android:layout_below=&quot;@+id/btnClose&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="25"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteLayoutParam"
+        message="Invalid layout param in a `LinearLayout`: `layout_toEndOf`"
+        errorLine1="            android:layout_toEndOf=&quot;@+id/play&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="27"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteLayoutParam"
+        message="Invalid layout param in a `LinearLayout`: `layout_toRightOf`"
+        errorLine1="            android:layout_toRightOf=&quot;@+id/play&quot;>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="28"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; `SDK_INT` is always >= 23"
+        errorLine1="        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="1182"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; `SDK_INT` is always >= 23"
+        errorLine1="        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/Traking.java"
+            line="263"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="ObsoleteSdkInt"
+        message="Unnecessary; `SDK_INT` is always >= 23"
+        errorLine1="        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) piFlags |= PendingIntent.FLAG_IMMUTABLE;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/Traking.java"
+            line="349"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        message="This `AsyncTask` class should be static or leaks might occur (com.gaston.lesbegueris.notepases.Tab1.LoadDataTask)"
+        errorLine1="    private class LoadDataTask extends AsyncTask {"
+        errorLine2="                  ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/Tab1.java"
+            line="114"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        message="This `AsyncTask` class should be static or leaks might occur (com.gaston.lesbegueris.notepases.Tab1Fragment.LoadDataTask)"
+        errorLine1="    private class LoadDataTask extends AsyncTask&lt;Void, Void, Void> {"
+        errorLine2="                  ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/Tab1Fragment.java"
+            line="109"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        message="This `AsyncTask` class should be static or leaks might occur (com.gaston.lesbegueris.notepases.Tab2.LoadDataTask)"
+        errorLine1="    private class LoadDataTask extends AsyncTask {"
+        errorLine2="                  ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/Tab2.java"
+            line="128"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="StaticFieldLeak"
+        message="This `AsyncTask` class should be static or leaks might occur (com.gaston.lesbegueris.notepases.Tab2Fragment.LoadDataTask)"
+        errorLine1="    private class LoadDataTask extends AsyncTask&lt;Void, Void, Void> {"
+        errorLine2="                  ~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/Tab2Fragment.java"
+            line="109"
+            column="19"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/colorSurface` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        errorLine1="    android:background=&quot;@color/colorSurface&quot;>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_location.xml"
+            line="11"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `#FFFFFF` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        errorLine1="    android:background=&quot;#FFFFFF&quot;>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_griscal_promo.xml"
+            line="6"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/colorBackground` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        errorLine1="    android:background=&quot;@color/colorBackground&quot;>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/tab1.xml"
+            line="6"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="Overdraw"
+        message="Possible overdraw: Root element paints background `@color/colorBackground` with a theme that also paints a background (inferred theme is `@style/AppTheme`)"
+        errorLine1="    android:background=&quot;@color/colorBackground&quot;>"
+        errorLine2="    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/tab2.xml"
+            line="6"
+            column="5"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.arrow` appears to be unused">
+        <location
+            file="src/main/res/mipmap-hdpi/arrow.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.border` appears to be unused"
+        errorLine1="&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable-v24/border.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.botonazul` appears to be unused">
+        <location
+            file="src/main/res/mipmap-hdpi/botonazul.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.colorPrimaryDark` appears to be unused"
+        errorLine1="    &lt;color name=&quot;colorPrimaryDark&quot;>#0b1d33&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="5"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.colorAccent` appears to be unused"
+        errorLine1="    &lt;color name=&quot;colorAccent&quot;>#04f8dc&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="11"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.colorOnBackground` appears to be unused"
+        errorLine1="    &lt;color name=&quot;colorOnBackground&quot;>#1A1F3A&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="17"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.colorAlarmBg2` appears to be unused"
+        errorLine1="    &lt;color name=&quot;colorAlarmBg2&quot;>#0b1d33&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="34"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.marfil` appears to be unused"
+        errorLine1="    &lt;color name=&quot;marfil&quot;>#cafbf2&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="39"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.color.wallet_holo_blue_light` appears to be unused"
+        errorLine1="    &lt;color name=&quot;wallet_holo_blue_light&quot;>#33B5E5&lt;/color>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/colors.xml"
+            line="40"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.custom_rectangle` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable-hdpi/custom_rectangle.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.custom_rectangle2` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable-v24/custom_rectangle2.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.custom_shadow` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable-hdpi/custom_shadow.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.despertador` appears to be unused">
+        <location
+            file="src/main/res/drawable/despertador.gif"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.fab_teal_bg` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/fab_teal_bg.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.go` appears to be unused">
+        <location
+            file="src/main/res/mipmap-hdpi/go.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.google_maps_key` appears to be unused"
+        errorLine1="    &lt;string name=&quot;google_maps_key&quot; templateMergeStrategy=&quot;preserve&quot; translatable=&quot;false&quot;>AIzaSyBjXZ8oDWSSF4-aoXhYpnPuy3n6QvXVBIY&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/debug/res/values/google_maps_api.xml"
+            line="23"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.ic_destino` appears to be unused">
+        <location
+            file="src/main/res/mipmap-hdpi/ic_destino.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.ic_launcher_foreground` appears to be unused"
+        errorLine1="&lt;vector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable-v24/ic_launcher_foreground.xml"
+            line="1"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.ic_stat_name` appears to be unused">
+        <location
+            file="src/main/res/drawable-hdpi/ic_stat_name.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.icon1` appears to be unused">
+        <location
+            file="src/main/res/mipmap-hdpi/icon1.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.icono512` appears to be unused">
+        <location
+            file="src/main/res/drawable-v24/icono512.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.pencil` appears to be unused">
+        <location
+            file="src/main/res/mipmap-hdpi/pencil.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.play` appears to be unused">
+        <location
+            file="src/main/res/mipmap-hdpi/play.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.shadow1` appears to be unused"
+        errorLine1="&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/shadow1.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.start` appears to be unused">
+        <location
+            file="src/main/res/mipmap-hdpi/start.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.mipmap.stop` appears to be unused">
+        <location
+            file="src/main/res/mipmap-hdpi/stop.png"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.title_activity_maps` appears to be unused"
+        errorLine1="    &lt;string name=&quot;title_activity_maps&quot;>Map&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="3"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.banner_ad_unit_id` appears to be unused"
+        errorLine1="    &lt;string name=&quot;banner_ad_unit_id&quot; translatable=&quot;false&quot;>ca-app-pub-9841764898906750/1703228093&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="7"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.Help` appears to be unused"
+        errorLine1="    &lt;string name=&quot;Help&quot; translatable=&quot;false&quot;>\?&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="8"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.distancia` appears to be unused"
+        errorLine1="    &lt;string name=&quot;distancia&quot;>Distancia:&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="23"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.alerta` appears to be unused"
+        errorLine1="    &lt;string name=&quot;alerta&quot;>mts. Alerta&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="24"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.menu_version` appears to be unused"
+        errorLine1="    &lt;string name=&quot;menu_version&quot;>v1.20&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="58"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.string.menu_griscal` appears to be unused"
+        errorLine1="    &lt;string name=&quot;menu_griscal&quot;>Griscal — Organiza tu familia&lt;/string>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/strings.xml"
+            line="61"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.style.TabWidgetTheme` appears to be unused"
+        errorLine1="    &lt;style name=&quot;TabWidgetTheme&quot; parent=&quot;ThemeOverlay.MaterialComponents&quot;>"
+        errorLine2="           ~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/values/styles.xml"
+            line="50"
+            column="12"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.tab_focused` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/tab_focused.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.tab_indicator` appears to be unused"
+        errorLine1="&lt;selector xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/tab_indicator.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.tab_pressed` appears to be unused"
+        errorLine1="&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; >"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/tab_pressed.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.tab_selected` appears to be unused"
+        errorLine1="&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; >"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/tab_selected.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.tab_unselected` appears to be unused"
+        errorLine1="&lt;layer-list xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot; >"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/tab_unselected.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UnusedResources"
+        message="The resource `R.drawable.top_panel_bg` appears to be unused"
+        errorLine1="&lt;shape xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/drawable/top_panel_bg.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="UselessParent"
+        message="This `RelativeLayout` layout or its `LinearLayout` parent is unnecessary"
+        errorLine1="    &lt;RelativeLayout"
+        errorLine2="     ~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="10"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="UselessParent"
+        message="This `ViewFlipper` layout or its `LinearLayout` parent is possibly unnecessary"
+        errorLine1="        &lt;ViewFlipper"
+        errorLine2="         ~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="21"
+            column="10"/>
+    </issue>
+
+    <issue
+        id="RedundantNamespace"
+        message="This namespace declaration is redundant"
+        errorLine1="    &lt;rotate xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/anim/shake.xml"
+            line="3"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="MonochromeLauncherIcon"
+        message="The application adaptive icon is missing a monochrome tag"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/ic_launcher.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="MonochromeLauncherIcon"
+        message="The application adaptive roundIcon is missing a monochrome tag"
+        errorLine1="&lt;adaptive-icon xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;>"
+        errorLine2="^">
+        <location
+            file="src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml"
+            line="2"
+            column="1"/>
+    </issue>
+
+    <issue
+        id="GifUsage"
+        message="Using the `.gif` format for bitmaps is discouraged">
+        <location
+            file="src/main/res/drawable/despertador.gif"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `cinco.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/cinco.png"/>
+        <location
+            file="src/main/res/drawable-v24/cinco.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `cuatro.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/cuatro.png"/>
+        <location
+            file="src/main/res/drawable-v24/cuatro.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `diez.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/diez.png"/>
+        <location
+            file="src/main/res/drawable-v24/diez.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `doce.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/doce.png"/>
+        <location
+            file="src/main/res/drawable-v24/doce.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `dos.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/dos.png"/>
+        <location
+            file="src/main/res/drawable-v24/dos.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `nueve.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/nueve.png"/>
+        <location
+            file="src/main/res/drawable-v24/nueve.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `ocho.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/ocho.png"/>
+        <location
+            file="src/main/res/drawable-v24/ocho.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `once.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/once.png"/>
+        <location
+            file="src/main/res/drawable-v24/once.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `seis.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/seis.png"/>
+        <location
+            file="src/main/res/drawable-v24/seis.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `siete.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/siete.png"/>
+        <location
+            file="src/main/res/drawable-v24/siete.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `tres.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/tres.png"/>
+        <location
+            file="src/main/res/drawable-v24/tres.png"/>
+    </issue>
+
+    <issue
+        id="IconDuplicatesConfig"
+        message="The `uno.png` icon has identical contents in the following configuration folders: drawable-v24, drawable">
+        <location
+            file="src/main/res/drawable/uno.png"/>
+        <location
+            file="src/main/res/drawable-v24/uno.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/cinco.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/cinco.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/cuatro.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/cuatro.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/despertador.gif` in densityless folder">
+        <location
+            file="src/main/res/drawable/despertador.gif"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/diez.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/diez.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/doce.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/doce.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/dos.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/dos.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/nueve.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/nueve.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/ocho.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/ocho.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/once.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/once.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/seis.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/seis.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/siete.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/siete.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/tres.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/tres.png"/>
+    </issue>
+
+    <issue
+        id="IconLocation"
+        message="Found bitmap drawable `res/drawable/uno.png` in densityless folder">
+        <location
+            file="src/main/res/drawable/uno.png"/>
+    </issue>
+
+    <issue
+        id="IconDensities"
+        message="Missing the following drawables in `drawable-hdpi`: ic_toolbar_logo.png (found in drawable-xxxhdpi)">
+        <location
+            file="src/main/res/drawable-hdpi"/>
+    </issue>
+
+    <issue
+        id="IconDensities"
+        message="Missing the following drawables in `drawable-mdpi`: custom_rectangle.xml, custom_rectangle2.xml, custom_shadow.xml, ic_toolbar_logo.png">
+        <location
+            file="src/main/res/drawable-mdpi"/>
+    </issue>
+
+    <issue
+        id="IconDensities"
+        message="Missing the following drawables in `drawable-xhdpi`: custom_rectangle.xml, custom_rectangle2.xml, custom_shadow.xml, ic_toolbar_logo.png">
+        <location
+            file="src/main/res/drawable-xhdpi"/>
+    </issue>
+
+    <issue
+        id="IconDensities"
+        message="Missing the following drawables in `drawable-xxhdpi`: custom_rectangle.xml, custom_rectangle2.xml, custom_shadow.xml, ic_toolbar_logo.png">
+        <location
+            file="src/main/res/drawable-xxhdpi"/>
+    </issue>
+
+    <issue
+        id="ButtonStyle"
+        message="Buttons in button bars should be borderless; use `style=&quot;?android:attr/buttonBarButtonStyle&quot;` (and `?android:attr/buttonBarStyle` on the parent)"
+        errorLine1="            &lt;Button"
+        errorLine2="             ~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_griscal_promo.xml"
+            line="51"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="SmallSp"
+        message="Avoid using sizes smaller than `11sp`: `10sp`"
+        errorLine1="                    android:textSize=&quot;10sp&quot; />"
+        errorLine2="                    ~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_mapa.xml"
+            line="153"
+            column="21"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="    &lt;com.google.android.material.floatingactionbutton.FloatingActionButton"
+        errorLine2="     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_main.xml"
+            line="70"
+            column="6"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="30"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="47"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="63"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="79"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="95"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="112"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="128"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="144"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="160"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="176"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="192"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="ContentDescription"
+        message="Missing `contentDescription` attribute on image"
+        errorLine1="            &lt;ImageView"
+        errorLine2="             ~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="208"
+            column="14"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="                txtBuscar.setText(&quot;Calculando Distancia ...&quot;);"
+        errorLine2="                                  ~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="777"
+            column="35"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="Do not concatenate text displayed with `setText`. Use resource string with placeholders."
+        errorLine1="        txtBuscar.setText(b + &quot; Mts&quot;);"
+        errorLine2="                          ~~~~~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="1087"
+            column="27"/>
+    </issue>
+
+    <issue
+        id="SetTextI18n"
+        message="String literal in `setText` can not be translated. Use Android resources instead."
+        errorLine1="        txtBuscar.setText(b + &quot; Mts&quot;);"
+        errorLine2="                              ~~~~~~">
+        <location
+            file="src/main/java/com/gaston/lesbegueris/notepases/MapsActivity.java"
+            line="1087"
+            column="31"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Toca el ícono para detener&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;Toca el ícono para detener&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_alarma.xml"
+            line="68"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;300&quot;, should use `@string` resource"
+        errorLine1="                        android:text=&quot;300&quot; />"
+        errorLine2="                        ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_mapa.xml"
+            line="114"
+            column="25"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Agregar Ubicación&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;Agregar Ubicación&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_location.xml"
+            line="29"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;✕&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;✕&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_location.xml"
+            line="45"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;¿Cómo deseas agregar la ubicación?&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;¿Cómo deseas agregar la ubicación?&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_location.xml"
+            line="59"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Seleccionar en el mapa&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;Seleccionar en el mapa&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_location.xml"
+            line="73"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Ingresar dirección&quot;, should use `@string` resource"
+        errorLine1="        android:text=&quot;Ingresar dirección&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_add_location.xml"
+            line="93"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Griscal&quot;, should use `@string` resource"
+        errorLine1="            android:text=&quot;Griscal&quot;"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/dialog_griscal_promo.xml"
+            line="22"
+            column="13"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;CarePal: Mascotas y Salud&quot;, should use `@string` resource"
+        errorLine1="            &lt;item android:id=&quot;@+id/app_carepal_pets&quot;          android:title=&quot;CarePal: Mascotas y Salud&quot; />"
+        errorLine2="                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/menu.xml"
+            line="15"
+            column="63"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;CarePal: Autos y Service&quot;, should use `@string` resource"
+        errorLine1="            &lt;item android:id=&quot;@+id/app_carepal_cars&quot;          android:title=&quot;CarePal: Autos y Service&quot; />"
+        errorLine2="                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/menu.xml"
+            line="16"
+            column="63"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;CarePal: Familia y Agenda&quot;, should use `@string` resource"
+        errorLine1="            &lt;item android:id=&quot;@+id/app_carepal_family&quot;        android:title=&quot;CarePal: Familia y Agenda&quot; />"
+        errorLine2="                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/menu.xml"
+            line="17"
+            column="63"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;CarePal: Hogar y Mantenimiento&quot;, should use `@string` resource"
+        errorLine1="            &lt;item android:id=&quot;@+id/app_carepal_house&quot;         android:title=&quot;CarePal: Hogar y Mantenimiento&quot; />"
+        errorLine2="                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/menu.xml"
+            line="18"
+            column="63"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Griscal: Hogar y Familia&quot;, should use `@string` resource"
+        errorLine1="            &lt;item android:id=&quot;@+id/app_griscal&quot;               android:title=&quot;Griscal: Hogar y Familia&quot; />"
+        errorLine2="                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/menu.xml"
+            line="19"
+            column="63"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Mi Linterna&quot;, should use `@string` resource"
+        errorLine1="            &lt;item android:id=&quot;@+id/app_milinterna&quot;            android:title=&quot;Mi Linterna&quot; />"
+        errorLine2="                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/menu.xml"
+            line="20"
+            column="63"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;MiLupa&quot;, should use `@string` resource"
+        errorLine1="            &lt;item android:id=&quot;@+id/app_milupa&quot;                android:title=&quot;MiLupa&quot; />"
+        errorLine2="                                                              ~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/menu.xml"
+            line="21"
+            column="63"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;Permission Inspector&quot;, should use `@string` resource"
+        errorLine1="            &lt;item android:id=&quot;@+id/app_permission_inspector&quot;  android:title=&quot;Permission Inspector&quot; />"
+        errorLine2="                                                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/menu.xml"
+            line="22"
+            column="63"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;v&quot;, should use `@string` resource"
+        errorLine1="        android:title=&quot;v&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/menu.xml"
+            line="54"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="HardcodedText"
+        message="Hardcoded string &quot;X&quot;, should use `@string` resource"
+        errorLine1="        android:title=&quot;X&quot;"
+        errorLine2="        ~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/menu/menuclose.xml"
+            line="8"
+            column="9"/>
+    </issue>
+
+    <issue
+        id="RtlSymmetry"
+        message="When you define `paddingEnd` you should probably also define `paddingStart` for right-to-left symmetry"
+        errorLine1="                android:paddingEnd=&quot;8dp&quot;>"
+        errorLine2="                ~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_mapa.xml"
+            line="93"
+            column="17"/>
+    </issue>
+
+    <issue
+        id="RtlHardcoded"
+        message="Redundant attribute `layout_toRightOf`; already defining `layout_toEndOf` with `targetSdkVersion` 36"
+        errorLine1="            android:layout_toRightOf=&quot;@+id/play&quot;>"
+        errorLine2="            ~~~~~~~~~~~~~~~~~~~~~~~~">
+        <location
+            file="src/main/res/layout/activity_tuto.xml"
+            line="28"
+            column="13"/>
+    </issue>
+
+</issues>
