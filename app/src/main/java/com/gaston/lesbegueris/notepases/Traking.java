@@ -306,10 +306,10 @@ public class Traking extends Service implements LocationListener {
             // Tracking channel — quiet, ongoing
             NotificationChannel trackingChannel = new NotificationChannel(
                     CHANNEL_ID,
-                    "Tracking",
+                    getString(R.string.channel_tracking),
                     NotificationManager.IMPORTANCE_LOW
             );
-            trackingChannel.setDescription("Shows distance to destination while tracking");
+            trackingChannel.setDescription(getString(R.string.channel_tracking_desc));
             trackingChannel.enableVibration(false);
             trackingChannel.enableLights(false);
             trackingChannel.setSound(null, null);
@@ -323,10 +323,10 @@ public class Traking extends Service implements LocationListener {
                     .build();
             NotificationChannel alarmChannel = new NotificationChannel(
                     ALARM_CHANNEL_ID,
-                    "GPS Alert Alarm",
+                    getString(R.string.channel_alarm),
                     NotificationManager.IMPORTANCE_HIGH
             );
-            alarmChannel.setDescription("Fires when you reach your destination");
+            alarmChannel.setDescription(getString(R.string.channel_alarm_desc));
             alarmChannel.enableVibration(true);
             alarmChannel.setVibrationPattern(new long[]{0, 500, 200, 500});
             alarmChannel.setSound(alarmSound, audioAttr);
@@ -364,7 +364,7 @@ public class Traking extends Service implements LocationListener {
                     .setContentText(getString(R.string.recibiendo));
         } else {
             DistanceFormatter.Display display = DistanceFormatter.formatDistance(this, distanceMeters);
-            builder.setContentTitle(getString(R.string.falta) + " " + display.value + " " + display.unit);
+            builder.setContentTitle(getString(R.string.falta_format, display.value, display.unit));
         }
 
         return builder;

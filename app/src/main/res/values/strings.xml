@@ -75,4 +75,64 @@
     <string name="contact_cancel">Cancelar</string>
     <string name="contact_empty_error">Escribí un mensaje antes de enviar</string>
 
+    <!-- Extracted from code/layouts 2026-10-29 (default text kept verbatim) -->
+    <string name="loading_data">Loading data...</string>
+    <string name="address_input_hint">Ingresa una dirección</string>
+    <string name="address_search">Buscar</string>
+    <string name="address_empty_error">Por favor ingresa una dirección</string>
+    <string name="location_default_name">Ubicación</string>
+    <string name="address_not_found">No se encontró la dirección. Intenta con otra dirección o selecciona en el mapa.</string>
+    <string name="address_search_error">Error al buscar la dirección. Intenta seleccionar en el mapa.</string>
+    <string name="version_format" translatable="false">v%1$s</string>
+    <string name="version_placeholder" translatable="false">v</string>
+    <string name="map_tap_to_select">Toca el mapa para seleccionar una ubicación</string>
+    <string name="location_selected_coords">Ubicación seleccionada: %1$s, %2$s</string>
+    <string name="location_selected">Ubicación seleccionada</string>
+    <string name="getting_address">Obteniendo dirección...</string>
+    <string name="channel_tracking_main">Tracking Channel</string>
+    <string name="channel_tracking_main_desc">Channel for tracking notifications</string>
+    <string name="channel_tracking">Tracking</string>
+    <string name="channel_tracking_desc">Shows distance to destination while tracking</string>
+    <string name="channel_alarm">GPS Alert Alarm</string>
+    <string name="channel_alarm_desc">Fires when you reach your destination</string>
+    <string name="name_dialog_save">Save</string>
+    <string name="name_dialog_cancel">Cancel</string>
+    <string name="marker_destination">Destino</string>
+    <string name="calculating_distance">Calculando Distancia ...</string>
+    <string name="permission_error">Error de permisos</string>
+    <string name="fullscreen_permission_title">Permiso necesario</string>
+    <string name="fullscreen_permission_message">Para que la alarma te despierte con la pantalla apagada necesitamos un permiso especial. Toca «Dar permiso» y actívalo para esta app.</string>
+    <string name="fullscreen_permission_grant">Dar permiso</string>
+    <string name="fullscreen_permission_later">Ahora no</string>
+    <string name="fullscreen_permission_denied">La alarma puede no encender la pantalla si está bloqueada</string>
+    <string name="battery_saver_warning">⚠ Ahorro de batería activo — puede afectar la precisión del GPS</string>
+    <string name="battery_saver_settings">Ajustes</string>
+    <string name="battery_optimization_warning">La app puede cerrarse en segundo plano. Recomendamos desactivar optimización.</string>
+    <string name="battery_optimization_disable">Desactivar</string>
+    <string name="select_destination_first">Selecciona un destino primero</string>
+    <string name="enter_alert_distance">Ingresa la distancia de alerta</string>
+    <string name="invalid_distance">Distancia inválida</string>
+    <string name="distance_meters_format">%1$d Mts</string>
+    <string name="notif_remaining_meters">%1$d mts.</string>
+    <string name="falta_format">Faltan : %1$s %2$s</string>
+    <string name="marker_click_count">%1$s has been clicked %2$d times.</string>
+    <string name="alarm_tap_to_stop">Toca el ícono para detener</string>
+    <string name="default_alert_distance" translatable="false">300</string>
+    <string name="add_location_title">Agregar Ubicación</string>
+    <string name="close_symbol" translatable="false">✕</string>
+    <string name="add_location_question">¿Cómo deseas agregar la ubicación?</string>
+    <string name="add_location_map">Seleccionar en el mapa</string>
+    <string name="add_location_address">Ingresar dirección</string>
+    <string name="brand_griscal" translatable="false">Griscal</string>
+    <string name="menu_close_x" translatable="false">X</string>
+
+    <!-- "Our apps" submenu -->
+    <string name="menu_app_carepal_pets">CarePal: Mascotas y Salud</string>
+    <string name="menu_app_carepal_cars">CarePal: Autos y Service</string>
+    <string name="menu_app_carepal_family">CarePal: Familia y Agenda</string>
+    <string name="menu_app_carepal_house">CarePal: Hogar y Mantenimiento</string>
+    <string name="menu_app_griscal">Griscal: Hogar y Familia</string>
+    <string name="menu_app_milinterna" translatable="false">Mi Linterna</string>
+    <string name="menu_app_milupa" translatable="false">MiLupa</string>
+    <string name="menu_app_permission_inspector" translatable="false">Permission Inspector</string>
 </resources>

@@ -298,7 +298,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             if (vItem != null) {
                 try {
                     String ver = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-                    vItem.setTitle("v" + ver);
+                    vItem.setTitle(getString(R.string.version_format, ver));
                 } catch (android.content.pm.PackageManager.NameNotFoundException ignored) {}
                 vItem.setEnabled(false);
             }
@@ -392,10 +392,10 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel channel = new NotificationChannel(
                     CHANNEL_ID,
-                    "Tracking Channel",
+                    getString(R.string.channel_tracking_main),
                     NotificationManager.IMPORTANCE_DEFAULT
             );
-            channel.setDescription("Channel for tracking notifications");
+            channel.setDescription(getString(R.string.channel_tracking_main_desc));
             channel.enableVibration(false);
             channel.enableLights(false);
             NotificationManager manager = getSystemService(NotificationManager.class);
@@ -491,14 +491,14 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         }
         dialogBuilder.setTitle(R.string.modificanombre);
         //dialogBuilder.setMessage("Enter text below");
-        dialogBuilder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+        dialogBuilder.setPositiveButton(R.string.name_dialog_save, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //do something with
                 name = edt.getText().toString();
                 favorito();
             }
         });
-        dialogBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        dialogBuilder.setNegativeButton(R.string.name_dialog_cancel, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 //pass
             }
@@ -698,7 +698,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         markerDestino = googleMap.addMarker(new MarkerOptions()
                 .snippet(address)
                 .position(position)
-                .title("Destino")
+                .title(getString(R.string.marker_destination))
                 .icon(BitmapDescriptorFactory.defaultMarker())
                 .draggable(true));
         updateCameraToBounds();
@@ -774,7 +774,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                 // TODO Auto-generated method stub
                 circle.remove();
                 Log.d("Marker", "Started");
-                txtBuscar.setText("Calculando Distancia ...");
+                txtBuscar.setText(R.string.calculating_distance);
 
 
             }
@@ -796,7 +796,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                     grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 mMap.setMyLocationEnabled(true);
             } else {
-                Toast.makeText(this, "Error de permisos", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.permission_error, Toast.LENGTH_LONG).show();
             }
 
         }
@@ -941,16 +941,16 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             if (nm != null && !nm.canUseFullScreenIntent()) {
                 new androidx.appcompat.app.AlertDialog.Builder(this)
-                        .setTitle("Permiso necesario")
-                        .setMessage("Para que la alarma te despierte con la pantalla apagada necesitamos un permiso especial. Toca «Dar permiso» y actívalo para esta app.")
-                        .setPositiveButton("Dar permiso", (d, w) -> {
+                        .setTitle(R.string.fullscreen_permission_title)
+                        .setMessage(R.string.fullscreen_permission_message)
+                        .setPositiveButton(R.string.fullscreen_permission_grant, (d, w) -> {
                             Intent s = new Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT);
                             s.setData(android.net.Uri.parse("package:" + getPackageName()));
                             startActivity(s);
                         })
-                        .setNegativeButton("Ahora no", (d, w) ->
+                        .setNegativeButton(R.string.fullscreen_permission_later, (d, w) ->
                                 Toast.makeText(this,
-                                        "La alarma puede no encender la pantalla si está bloqueada",
+                                        R.string.fullscreen_permission_denied,
                                         Toast.LENGTH_LONG).show())
                         .show();
                 return; // wait for user to grant before starting
@@ -965,18 +965,18 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
                 // Battery saver is ON — GPS and background services are throttled by the OS
                 com.google.android.material.snackbar.Snackbar
                         .make(rootView,
-                                "⚠ Ahorro de batería activo — puede afectar la precisión del GPS",
+                                R.string.battery_saver_warning,
                                 com.google.android.material.snackbar.Snackbar.LENGTH_INDEFINITE)
-                        .setAction("Ajustes", v -> startActivity(
+                        .setAction(R.string.battery_saver_settings, v -> startActivity(
                                 new Intent(Settings.ACTION_BATTERY_SAVER_SETTINGS)))
                         .show();
             } else if (!pm.isIgnoringBatteryOptimizations(getPackageName())) {
                 // Battery optimization is ON for this app — service may be killed in background
                 com.google.android.material.snackbar.Snackbar
                         .make(rootView,
-                                "La app puede cerrarse en segundo plano. Recomendamos desactivar optimización.",
+                                R.string.battery_optimization_warning,
                                 com.google.android.material.snackbar.Snackbar.LENGTH_LONG)
-                        .setAction("Desactivar", v -> {
+                        .setAction(R.string.battery_optimization_disable, v -> {
                             Intent i = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
                             i.setData(android.net.Uri.parse("package:" + getPackageName()));
                             startActivity(i);
@@ -986,7 +986,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         }
 
         if (markerDestino == null) {
-            Toast.makeText(this, "Selecciona un destino primero", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.select_destination_first, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -1007,13 +1007,13 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
         CharSequence charAlerta = txtDistancia.getText();
         if (charAlerta == null || charAlerta.toString().trim().isEmpty()) {
-            Toast.makeText(this, "Ingresa la distancia de alerta", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.enter_alert_distance, Toast.LENGTH_SHORT).show();
             return;
         }
         try {
             alerta = parseInt(charAlerta.toString().trim());
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Distancia inválida", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.invalid_distance, Toast.LENGTH_SHORT).show();
             return;
         }
         String destination = String.valueOf(markerDestino.getPosition());
@@ -1084,7 +1084,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
 
         distance = results[0];
         b = (int) distance;
-        txtBuscar.setText(b + " Mts");
+        txtBuscar.setText(getString(R.string.distance_meters_format, b));
     }
 
     private void updateCameraToBounds() {
@@ -1189,7 +1189,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(MapsActivity.this, CHANNEL_ID)
                         .setSmallIcon(R.drawable.noti)
-                        .setContentTitle(falta+" mts.")
+                        .setContentTitle(getString(R.string.notif_remaining_meters, falta))
                         .setContentIntent(pIntent1)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setAutoCancel(false)
@@ -1213,8 +1213,7 @@ public class MapsActivity extends AppCompatActivity implements LocationListener,
             clickCount = clickCount + 1;
             marker.setTag(clickCount);
             Toast.makeText(this,
-                    marker.getTitle() +
-                            " has been clicked " + clickCount + " times.",
+                    getString(R.string.marker_click_count, marker.getTitle(), clickCount),
                     Toast.LENGTH_SHORT).show();
             /*
             latitude2 = marker.getPosition().latitude;

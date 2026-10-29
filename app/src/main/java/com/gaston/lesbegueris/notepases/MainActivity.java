@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
         MaterialAlertDialogBuilder dialogBuilder = new MaterialAlertDialogBuilder(this);
 
         TextInputLayout inputLayout = new TextInputLayout(this);
-        inputLayout.setHint("Ingresa una dirección");
+        inputLayout.setHint(getString(R.string.address_input_hint));
         inputLayout.setBoxBackgroundMode(TextInputLayout.BOX_BACKGROUND_OUTLINE);
 
         final TextInputEditText edtAddress = new TextInputEditText(this);
@@ -158,17 +158,17 @@ public class MainActivity extends AppCompatActivity {
         inputLayout.addView(edtAddress);
 
         dialogBuilder.setView(inputLayout);
-        dialogBuilder.setPositiveButton("Buscar", new DialogInterface.OnClickListener() {
+        dialogBuilder.setPositiveButton(R.string.address_search, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {
                 String address = edtAddress.getText().toString();
                 if (!address.isEmpty()) {
                     geocodeAddress(address);
                 } else {
-                    Toast.makeText(MainActivity.this, "Por favor ingresa una dirección", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.address_empty_error, Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        dialogBuilder.setNegativeButton("Cancelar", null);
+        dialogBuilder.setNegativeButton(R.string.contact_cancel, null);
         dialogBuilder.show();
     }
     
@@ -187,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
                     placeName = address.getThoroughfare();
                 }
                 if (placeName == null || placeName.isEmpty()) {
-                    placeName = "Ubicación";
+                    placeName = getString(R.string.location_default_name);
                 }
                 
                 Intent intent = new Intent(MainActivity.this, MapsActivity.class);
@@ -197,11 +197,11 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("address", fullAddress);
                 startActivity(intent);
             } else {
-                Toast.makeText(this, "No se encontró la dirección. Intenta con otra dirección o selecciona en el mapa.", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.address_not_found, Toast.LENGTH_LONG).show();
             }
         } catch (IOException e) {
             e.printStackTrace();
-            Toast.makeText(this, "Error al buscar la dirección. Intenta seleccionar en el mapa.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.address_search_error, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -212,7 +212,7 @@ public class MainActivity extends AppCompatActivity {
         if (versionItem != null) {
             try {
                 String v = getPackageManager().getPackageInfo(getPackageName(), 0).versionName;
-                versionItem.setTitle("v" + v);
+                versionItem.setTitle(getString(R.string.version_format, v));
             } catch (android.content.pm.PackageManager.NameNotFoundException ignored) {}
             versionItem.setEnabled(false);
         }

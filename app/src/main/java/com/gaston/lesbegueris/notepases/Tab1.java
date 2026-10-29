@@ -120,7 +120,7 @@ public class Tab1 extends Activity implements OnClickListener {
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(getApplicationContext(), "Loading data...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.loading_data, Toast.LENGTH_SHORT).show();
         }
 
         protected void onPostExecute(Void unused) {

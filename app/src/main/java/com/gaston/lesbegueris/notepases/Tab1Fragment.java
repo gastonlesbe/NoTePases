@@ -114,7 +114,7 @@ public class Tab1Fragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            Toast.makeText(requireContext(), "Loading data...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(requireContext(), R.string.loading_data, Toast.LENGTH_SHORT).show();
         }
 
         @Override

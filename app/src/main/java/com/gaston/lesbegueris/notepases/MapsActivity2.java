@@ -103,7 +103,7 @@ public class MapsActivity2 extends AppCompatActivity
         */
         
         // Mostrar mensaje al usuario
-        Toast.makeText(this, "Toca el mapa para seleccionar una ubicación", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, R.string.map_tap_to_select, Toast.LENGTH_LONG).show();
         
         // Permitir al usuario tocar el mapa para seleccionar una ubicación
         // Usar un marcador arrastrable como alternativa más confiable
@@ -142,17 +142,17 @@ public class MapsActivity2 extends AppCompatActivity
     
     private void handleLocationSelection(LatLng latLng) {
         Log.d(TAG, "Map clicked at: " + latLng.latitude + ", " + latLng.longitude);
-        Toast.makeText(MapsActivity2.this, "Ubicación seleccionada: " + latLng.latitude + ", " + latLng.longitude, Toast.LENGTH_SHORT).show();
+        Toast.makeText(MapsActivity2.this, getString(R.string.location_selected_coords, String.valueOf(latLng.latitude), String.valueOf(latLng.longitude)), Toast.LENGTH_SHORT).show();
         
         // Agregar marcador en la ubicación seleccionada
         mMap.clear();
-        mMap.addMarker(new MarkerOptions().position(latLng).title("Ubicación seleccionada"));
+        mMap.addMarker(new MarkerOptions().position(latLng).title(getString(R.string.location_selected)));
         
         // Guardar la ubicación seleccionada
         selectedLocation = latLng;
         
         // Mostrar mensaje de procesamiento
-        Toast.makeText(MapsActivity2.this, "Obteniendo dirección...", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MapsActivity2.this, R.string.getting_address, Toast.LENGTH_SHORT).show();
         
         // Obtener dirección usando Geocoder
         Geocoder geocoder = new Geocoder(MapsActivity2.this, Locale.getDefault());
@@ -176,7 +176,7 @@ public class MapsActivity2 extends AppCompatActivity
                     placeName = address.getSubThoroughfare();
                 }
                 if (placeName == null || placeName.isEmpty()) {
-                    placeName = "Ubicación";
+                    placeName = getString(R.string.location_default_name);
                 }
                 
                 Log.d(TAG, "Address found: " + fullAddress);

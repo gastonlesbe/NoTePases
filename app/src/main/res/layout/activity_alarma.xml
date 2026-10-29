@@ -65,7 +65,7 @@
             android:layout_marginTop="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
-            android:text="Toca el ícono para detener"
+            android:text="@string/alarm_tap_to_stop"
             android:textColor="#80FFFFFF"
             android:textSize="15sp" />
 

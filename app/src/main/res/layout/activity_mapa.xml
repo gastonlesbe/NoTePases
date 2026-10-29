@@ -111,7 +111,7 @@
                         android:fontFamily="@font/poppins_regular"
                         android:gravity="center_horizontal"
                         android:inputType="number"
-                        android:text="300" />
+                        android:text="@string/default_alert_distance" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textview.MaterialTextView
