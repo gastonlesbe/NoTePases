@@ -26,6 +26,8 @@ public class Alarma extends AppCompatActivity {
     ImageButton btnAlarma;
     SharedPreferences sharedpreferences;
     public static final String MyPREFERENCES = "lastLocation";
+    static final String PREF_REVIEW_AFTER_ALARM = "review_after_alarm";
+    static final String PREF_SUCCESSFUL_ALARMS = "successful_alarms";
     private MediaPlayer ring;
 
     @Override
@@ -83,7 +85,17 @@ public class Alarma extends AppCompatActivity {
             ring = null;
         }
         releaseWakeLock();
+        markSuccessfulAlarm();
         stopTraking();
+    }
+
+    /** Lets MainActivity ask for a review right after a trip where the alarm worked. */
+    private void markSuccessfulAlarm() {
+        SharedPreferences meta = getSharedPreferences("app_meta", Context.MODE_PRIVATE);
+        meta.edit()
+                .putInt(PREF_SUCCESSFUL_ALARMS, meta.getInt(PREF_SUCCESSFUL_ALARMS, 0) + 1)
+                .putBoolean(PREF_REVIEW_AFTER_ALARM, true)
+                .apply();
     }
 
     private void releaseWakeLock() {
