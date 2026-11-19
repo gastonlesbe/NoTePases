@@ -1,0 +1,206 @@
+{
+ "departure_utc": "2026-11-19T11:30:00+00:00",
+ "results": [
+  {
+   "region": "BA",
+   "from": "Obelisco",
+   "to": "Estación Tigre",
+   "transitous": [],
+   "google": null
+  },
+  {
+   "region": "BA",
+   "from": "Plaza Constitución",
+   "to": "Estación La Plata",
+   "transitous": [],
+   "google": null
+  },
+  {
+   "region": "BA",
+   "from": "Estación Liniers",
+   "to": "Plaza Italia",
+   "transitous": [],
+   "google": null
+  },
+  {
+   "region": "BA",
+   "from": "Retiro",
+   "to": "Aeroparque Jorge Newbery",
+   "transitous": [],
+   "google": null
+  },
+  {
+   "region": "MdP",
+   "from": "Terminal de Ómnibus Mar del Plata",
+   "to": "Puerto de Mar del Plata",
+   "transitous": [],
+   "google": null
+  },
+  {
+   "region": "MdP",
+   "from": "Plaza San Martín (MdP)",
+   "to": "Complejo Universitario UNMdP",
+   "transitous": [],
+   "google": null
+  },
+  {
+   "region": "CBA",
+   "from": "Terminal de Córdoba",
+   "to": "Ciudad Universitaria UNC",
+   "transitous": [],
+   "google": null
+  },
+  {
+   "region": "ROS",
+   "from": "Monumento a la Bandera",
+   "to": "Terminal Mariano Moreno",
+   "transitous": [],
+   "google": null
+  },
+  {
+   "region": "SP",
+   "from": "MASP (Av. Paulista)",
+   "to": "Rodoviária Tietê",
+   "transitous": [
+    {
+     "minutes": 48,
+     "legs": [
+      {
+       "mode": "BUS",
+       "line": "106A-10",
+       "board": "Getúlio Vargas B/C",
+       "alight": "R. Paineira Do Campo, 45",
+       "alight_latlng": [
+        -23.513172,
+        -46.62686
+       ],
+       "stops": 10
+      }
+     ]
+    },
+    {
+     "minutes": 32,
+     "legs": [
+      {
+       "mode": "BUS",
+       "line": "106A-10",
+       "board": "Getúlio Vargas B/C",
+       "alight": "Av. Tiradentes, 324",
+       "alight_latlng": [
+        -23.532795,
+        -46.63253800000001
+       ],
+       "stops": 4
+      },
+      {
+       "mode": "BUS",
+       "line": "218",
+       "board": "Avenida Tiradentes, 680 - Luz, São Paulo - SP, 01101-010, Brasil",
+       "alight": "Av. Cruzeiro do Sul, 1762 - Santana, São Paulo - SP, 02030-000, Brasil",
+       "alight_latlng": [
+        -23.515508999999998,
+        -46.62487
+       ],
+       "stops": 4
+      }
+     ]
+    },
+    {
+     "minutes": 41,
+     "legs": [
+      {
+       "mode": "BUS",
+       "line": "6358-10",
+       "board": "Getúlio Vargas B/C",
+       "alight": "Terminal Bandeira",
+       "alight_latlng": [
+        -23.54909,
+        -46.639748000000004
+       ],
+       "stops": 3
+      },
+      {
+       "mode": "BUS",
+       "line": "175T-10",
+       "board": "Av. Vinte E Três De Maio",
+       "alight": "R. Paineira Do Campo, 45",
+       "alight_latlng": [
+        -23.513172,
+        -46.62686
+       ],
+       "stops": 8
+      }
+     ]
+    }
+   ],
+   "google": null
+  },
+  {
+   "region": "RJ",
+   "from": "Copacabana (Posto 5)",
+   "to": "Maracanã",
+   "transitous": [
+    {
+     "minutes": 40,
+     "legs": [
+      {
+       "mode": "BUS",
+       "line": "485",
+       "board": "BRS 1,3,I: Bolívar",
+       "alight": "BRS 1,3,5: Cidade Nova",
+       "alight_latlng": [
+        -22.909664,
+        -43.206425
+       ],
+       "stops": 20
+      },
+      {
+       "mode": "BUS",
+       "line": "457",
+       "board": "BRS 1,2,3: Cidade Nova",
+       "alight": "Radialista Waldir Amaral",
+       "alight_latlng": [
+        -22.911776,
+        -43.234085
+       ],
+       "stops": 3
+      }
+     ]
+    },
+    {
+     "minutes": 41,
+     "legs": [
+      {
+       "mode": "BUS",
+       "line": "456",
+       "board": "BRS 1,3,I: Bolívar",
+       "alight": "Maracanã - Acesso Sul",
+       "alight_latlng": [
+        -22.913877000000003,
+        -43.230940000000004
+       ],
+       "stops": 31
+      }
+     ]
+    },
+    {
+     "minutes": 45,
+     "legs": [
+      {
+       "mode": "BUS",
+       "line": "457",
+       "board": "BRS 1,3,I: Bolívar",
+       "alight": "Radialista Waldir Amaral",
+       "alight_latlng": [
+        -22.911776,
+        -43.234085
+       ],
+       "stops": 17
+      }
+     ]
+    }
+   ],
+   "google": null
+  }
+ ]
+}
