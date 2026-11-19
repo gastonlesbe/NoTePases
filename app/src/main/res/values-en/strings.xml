@@ -29,7 +29,7 @@
     <string name="distancia">Distance:</string>
     <string name="alerta">meters to Alert</string>
     <string name="nombre">Name</string>
-    <string name="ultimos">Last</string>
+    <string name="ultimos">Recent</string>
     <string name="favoritas">Favorites</string>
     <string name="modificanombre">Change Nick</string>
     <string name="current_distance">Current distance</string>
