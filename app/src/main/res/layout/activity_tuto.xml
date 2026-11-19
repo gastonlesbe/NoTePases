@@ -232,7 +232,7 @@
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.MaterialComponents.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light"
+        app:popupTheme="@style/AppPopupOverlay"
         />
     </RelativeLayout>
 </LinearLayout>

@@ -99,4 +99,14 @@
     <string name="menu_app_carepal_family">CarePal: Family &amp; Planner</string>
     <string name="menu_app_carepal_house">CarePal: Home &amp; Maintenance</string>
     <string name="menu_app_griscal">Griscal: Home &amp; Family</string>
+
+    <!-- Missing en strings (added 2026-11-19) -->
+    <string name="close">Close</string>
+    <string name="menu_help">Help</string>
+    <string name="menu_contact">Contact</string>
+    <string name="menu_griscal">Griscal — Organize your family</string>
+    <string name="contact_title">Write to us</string>
+    <string name="contact_hint">Your message…</string>
+    <string name="contact_send">Send</string>
+    <string name="contact_empty_error">Write a message before sending</string>
 </resources>

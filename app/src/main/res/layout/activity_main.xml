@@ -29,7 +29,7 @@
             app:contentInsetStartWithNavigation="16dp"
             app:logo="@drawable/ic_toolbar_logo"
             app:logoDescription="@string/app_name"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:popupTheme="@style/AppPopupOverlay"
             app:title="@string/app_name"
             app:titleTextAppearance="@style/TitleTextAppearance"
             app:titleTextColor="@color/colorOnPrimary" />

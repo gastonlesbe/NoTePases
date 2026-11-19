@@ -74,4 +74,14 @@
         <item name="textAllCaps">false</item>
     </style>
 
+
+    <!-- Toolbar overflow menu: follows light/dark mode (surface background, onSurface text) -->
+    <style name="AppPopupOverlay" parent="ThemeOverlay.MaterialComponents">
+        <item name="android:colorBackground">@color/colorSurface</item>
+        <item name="colorSurface">@color/colorSurface</item>
+        <item name="android:textColorPrimary">@color/colorOnSurface</item>
+        <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="android:textColorHint">@color/colorTextSecondary</item>
+    </style>
+
 </resources>

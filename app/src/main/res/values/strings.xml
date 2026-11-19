@@ -23,7 +23,7 @@
     <string name="distancia">Distancia:</string>
     <string name="alerta">mts. Alerta</string>
     <string name="nombre">Nombre</string>
-    <string name="ultimos">Ultimos</string>
+    <string name="ultimos">Últimos</string>
     <string name="favoritas">Favoritas</string>
     <string name="modificanombre">Modifica el Nombre</string>
     <string name="close">Cerrar</string>
@@ -132,7 +132,7 @@
     <string name="menu_app_carepal_family">CarePal: Familia y Agenda</string>
     <string name="menu_app_carepal_house">CarePal: Hogar y Mantenimiento</string>
     <string name="menu_app_griscal">Griscal: Hogar y Familia</string>
-    <string name="menu_app_milinterna" translatable="false">Mi Linterna</string>
+    <string name="menu_app_milinterna" translatable="false">Luzen</string>
     <string name="menu_app_milupa" translatable="false">MiLupa</string>
     <string name="menu_app_permission_inspector" translatable="false">Permission Inspector</string>
 </resources>

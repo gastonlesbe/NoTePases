@@ -29,7 +29,7 @@
     <string name="distancia">Distância:</string>
     <string name="alerta">mts. Alerta</string>
     <string name="nombre">Nome</string>
-    <string name="ultimos">último</string>
+    <string name="ultimos">Últimos</string>
     <string name="favoritas">Favoritos</string>
     <string name="modificanombre">Modifique o Nome</string>
     <string name="griscal_promo_message">Organize sua família, pets, casa e veículos — tudo em um app. Gratuito.</string>
@@ -85,4 +85,28 @@
     <string name="menu_app_carepal_family">CarePal: Família e Agenda</string>
     <string name="menu_app_carepal_house">CarePal: Casa e Manutenção</string>
     <string name="menu_app_griscal">Griscal: Casa e Família</string>
+
+    <!-- Missing pt-BR strings (added 2026-11-19) -->
+    <string name="close">Fechar</string>
+    <string name="current_distance">Distância atual</string>
+    <string name="alerta_label">Alerta</string>
+    <string name="meters_short">m</string>
+    <string name="kilometers_short">km</string>
+    <string name="miles_short">mi</string>
+    <string name="detener">Parar</string>
+    <string name="units_title">Unidade de medida</string>
+    <string name="units_system">Automático (sistema)</string>
+    <string name="units_metric">Metros / Quilômetros</string>
+    <string name="units_imperial">Milhas</string>
+    <string name="delete">Excluir</string>
+    <string name="delete_address_title">Excluir endereço</string>
+    <string name="delete_address_message">Esta ação não pode ser desfeita. Excluir o endereço?</string>
+    <string name="delete_confirm">Excluir</string>
+    <string name="menu_help">Ajuda</string>
+    <string name="menu_contact">Contato</string>
+    <string name="menu_griscal">Griscal — Organize sua família</string>
+    <string name="contact_title">Escreva para nós</string>
+    <string name="contact_hint">Sua mensagem…</string>
+    <string name="contact_send">Enviar</string>
+    <string name="contact_empty_error">Escreva uma mensagem antes de enviar</string>
 </resources>
