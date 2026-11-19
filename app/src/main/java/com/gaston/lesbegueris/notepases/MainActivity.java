@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         // Inicializar Appodeal (mismo método que en Caretemplate)
         initAppodeal();
 
-        checkAndRequestReview();
+        boolean reviewRequested = checkAndRequestReview();
 
 
 
@@ -118,7 +118,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        showGriscalPromo();
+        // Don't stack the promo dialog on top of the review sheet
+        if (!reviewRequested) showGriscalPromo();
     }
 
 
@@ -364,13 +365,21 @@ public class MainActivity extends AppCompatActivity {
         new android.os.Handler().postDelayed(dialog::show, 1500);
     }
 
-    private void checkAndRequestReview() {
+    /** Returns true when the review flow was requested on this launch. */
+    private boolean checkAndRequestReview() {
         android.content.SharedPreferences prefs = getSharedPreferences("app_meta", MODE_PRIVATE);
         int runs = prefs.getInt("run_count", 0) + 1;
-        prefs.edit().putInt("run_count", runs).apply();
+        // Set by Alarma when the user dismisses an arrival alarm: the app just did its job,
+        // which is the best moment to ask. Consumed here so it fires once per alarm.
+        boolean afterAlarm = prefs.getBoolean(Alarma.PREF_REVIEW_AFTER_ALARM, false);
+        int alarms = prefs.getInt(Alarma.PREF_SUCCESSFUL_ALARMS, 0);
+        prefs.edit().putInt("run_count", runs).putBoolean(Alarma.PREF_REVIEW_AFTER_ALARM, false).apply();
 
-        // Ask on run 10, then every 30 runs so returning users get reminded
-        if (runs == 10 || (runs > 10 && runs % 30 == 0)) {
+        // Ask after the 1st, 3rd and 10th successful alarm; fall back to run 10, then every
+        // 30 runs. Play's own quota still limits how often the sheet really appears.
+        boolean askAfterAlarm = afterAlarm && (alarms == 1 || alarms == 3 || alarms == 10);
+        boolean askByRuns = runs == 10 || (runs > 10 && runs % 30 == 0);
+        if (askAfterAlarm || askByRuns) {
             ReviewManager manager = ReviewManagerFactory.create(this);
             manager.requestReviewFlow().addOnCompleteListener(task -> {
                 if (task.isSuccessful()) {
@@ -379,7 +388,9 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // If it fails we just skip silently — never block the user
             });
+            return true;
         }
+        return false;
     }
 }
 
