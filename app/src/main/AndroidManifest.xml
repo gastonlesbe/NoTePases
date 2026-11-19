@@ -8,6 +8,11 @@
          location permissions for the 'MyLocation' functionality. 
     -->
 
+    <!-- Implied by screenOrientation (app + ad SDK activities) and ACCESS_WIFI_STATE (ad SDKs); not required to run -->
+    <uses-feature android:name="android.hardware.screen.portrait" android:required="false" />
+    <uses-feature android:name="android.hardware.screen.landscape" android:required="false" />
+    <uses-feature android:name="android.hardware.wifi" android:required="false" />
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
